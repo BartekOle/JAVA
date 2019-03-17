@@ -3,19 +3,32 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Random;
 
 public class Main {
         static int  dimension;
         static int numberOfItems;
         static int capacityOfKnapsack;
+        static int pop_size;
+        static int gen;
+        static int tour;
+        static double Px;
+        static double Pm;
         static double minSpeed;
         static double maxSpeed;
         static double rentingRatio;
         static Miasto [] spisMiast;
         static Przedmiot [] spisPrzedmiotow;
+        static Osobnik child1;
+        static Osobnik child2;
     public static void main(String[] args) throws IOException {
 
-            wczytanieDanych();
+        pop_size = 100;
+        gen = 100;
+        tour = 5;
+        Px = 0.7;
+        Pm = 0.01;
+        wczytanieDanych();
         for(int i = 0; i < dimension; i++)
         {
             System.out.println(spisMiast[i+1].toString());
@@ -30,7 +43,7 @@ public class Main {
             System.out.print(zlodziej.trasa[i] + " ");
         }
         System.out.println();
-        System.out.println("Czas podrozy: " + czasPodrozy(zlodziej));
+        /*(System.out.println("Czas podrozy: " + czasPodrozy(zlodziej));
         wypelnienieMiast();
         double CzasPodroży = algorytmZachlanny(zlodziej);
         System.out.println("Czas podróży: " + CzasPodroży);
@@ -42,13 +55,28 @@ public class Main {
             if(spisPrzedmiotow[i+1].wziety == true) {
                 System.out.println(spisPrzedmiotow[i + 1].toString());
             }
+        }*/
+        Osobnik zlodziej2 = new Osobnik(capacityOfKnapsack, maxSpeed, minSpeed);
+        zlodziej2.chromoson(dimension);
+        for(int i = 0; i < zlodziej2.trasa.length; i++) {
+            System.out.print(zlodziej2.trasa[i] + " ");
         }
+        System.out.println();
+        krzyzowanie(zlodziej, zlodziej2);
+        for(int i = 0; i < zlodziej.trasa.length; i++) {
+            System.out.print(child1.trasa[i] + " ");
+        }
+        System.out.println();
+        for(int i = 0; i < zlodziej2.trasa.length; i++) {
+            System.out.print(child2.trasa[i] + " ");
+        }
+        System.out.println();
         }
 
 
     public static void wczytanieDanych() throws IOException
     {
-        String fileName = "C:\\Users\\dios1\\IdeaProjects\\SI1\\src\\easy_0.ttp";
+        String fileName = "C:\\Users\\dios1\\IdeaProjects\\SI1\\src\\easy_1.ttp";
         File file = new File(fileName);
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
@@ -151,6 +179,105 @@ public class Main {
             }
         }
         return prof;
+    }
+
+    public static void mutacja(Osobnik pop[])
+    {
+        for(int i = 0; i < pop_size; i++)
+        {
+            Random rand = new Random();
+            double liczba = rand.nextDouble();
+            if(liczba <= Pm)
+            {
+                int cyfra1 = rand.nextInt(dimension);
+                int cyfra2 = rand.nextInt(dimension);
+                while(cyfra1 == cyfra2)
+                {
+                    cyfra2 = rand.nextInt(dimension);
+                }
+                int pom = pop[i].trasa[cyfra1];
+                pop[1].trasa[cyfra1] = pop[i].trasa[cyfra2];
+                pop[i].trasa[cyfra2] = pom;
+                if(cyfra1 == 0)
+                {
+                    pop[i].trasa[dimension] = cyfra1;
+                }
+            }
+        }
+    }
+
+    public static void krzyzowanie(Osobnik o1, Osobnik o2)
+    {
+        child1 = new Osobnik(capacityOfKnapsack, maxSpeed, minSpeed);
+        child2 = new Osobnik(capacityOfKnapsack, maxSpeed, minSpeed);
+        child1.chromoson(dimension);
+        child2.chromoson(dimension);
+        Random rand = new Random();
+        double liczba = rand.nextDouble();
+        if(liczba <= Px) {
+            int range = dimension / 2;
+            if (range % 2 != 0) {
+                range++;
+            }
+            int range1 = range / 2;
+            int range2 = range1 + range;
+            int pom[] = new int[dimension + 1];
+            for (int i = 0; i < pom.length; i++) {
+                pom[i] = 0;
+            }
+            int pom2[] = new int[dimension + 1];
+            for (int i = 0; i < pom2.length; i++) {
+                pom2[i] = 0;
+            }
+            for (int i = range1; i <= range2; i++) {
+                child1.trasa[i] = o1.trasa[i];
+                child2.trasa[i] = o2.trasa[i];
+                pom[o1.trasa[i]] = 1;
+                pom2[o2.trasa[i]] = 1;
+            }
+
+            int index = range2 + 1;
+            int index2 = range2 + 1;
+            int index3 = range2 + 1;
+            while (index != range1) {
+                if (index == dimension) {
+                    index = 0;
+                }
+                if (index2 == dimension) {
+                    index2 = 0;
+                }
+                if (index3 == dimension) {
+                    index3 = 0;
+                }
+            while(pom[o2.trasa[index2]] != 0)
+            {
+                index2++;
+                if (index2 == dimension) {
+                    index2 = 0;
+                }
+            }
+            while(pom2[o1.trasa[index3]] != 0)
+                {
+                    index3++;
+                    if (index3 == dimension) {
+                        index3 = 0;
+                    }
+                }
+            child1.trasa[index] = o2.trasa[index2];
+            child2.trasa[index] = o1.trasa[index3];
+            pom[o2.trasa[index2]] = 1;
+            pom2[o1.trasa[index3]] = 1;
+            index++;
+            }
+            child1.trasa[dimension] = child1.trasa[0];
+            child2.trasa[dimension] = child2.trasa[0];
+        }
+        else
+        {
+            child1.trasa = o1.trasa;
+            child2.trasa = o2.trasa;
+        }
+
     }
 
     }

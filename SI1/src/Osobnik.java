@@ -19,7 +19,7 @@ public class Osobnik {
     {
         trasa = new int[iloscmiast+1];
         int pom[] = new int[iloscmiast+1];
-        for(int i = 0; i < trasa.length; i++)
+        for(int i = 1; i < trasa.length; i++)
         {
             pom[i] = 0;
         }
@@ -38,7 +38,7 @@ public class Osobnik {
            trasa[i] = liczba;
            pom[liczba] = liczba;
         }
-        trasa[trasa.length-1] += trasa[0];
+        trasa[trasa.length-1] = trasa[0];
 
     }
 
