@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Osobnik {
+public class Osobnik implements Cloneable {
     int [] trasa;
     int W;
     int Wc;
@@ -13,6 +13,19 @@ public class Osobnik {
         this.Wc = 0;
         this.Vmax = Vmax;
         this.Vmin = Vmin;
+    }
+
+    public Osobnik(int W, double Vmax, double Vmin, int [] trasa)
+    {
+        this.W = W;
+        this.Wc = 0;
+        this.Vmax = Vmax;
+        this.Vmin = Vmin;
+        this.trasa = new int[trasa.length];
+        for(int i = 0; i < trasa.length; i++)
+        {
+            this.trasa[i] = trasa[i];
+        }
     }
 
     public void chromoson(int iloscmiast)
@@ -53,6 +66,8 @@ public class Osobnik {
         double t = d/Vc;
         return t;
     }
+
+
 
 
 }

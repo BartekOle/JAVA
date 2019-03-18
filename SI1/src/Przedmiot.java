@@ -17,7 +17,7 @@ public class Przedmiot implements Comparable<Przedmiot> {
 
     public String toString()
     {
-        return "index: " +  index + " wartosc: " + wartosc + " waga: " + waga + " idmiasta: " + idmiasta;
+        return "index: " +  index + " wartosc: " + wartosc + " waga: " + waga + " idmiasta: " + idmiasta + " wziete: " + wziety;
     }
 
     public Double getProfit() {
