@@ -1,7 +1,6 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Collections;
 import java.util.Random;
 
@@ -31,7 +30,7 @@ public class Main  {
         populacja = new Osobnik[pop_size];
         nowaPopulacja = new Osobnik[pop_size];
         wczytanieDanych();
-        for(int i = 0; i < dimension; i++)
+        /*for(int i = 0; i < dimension; i++)
         {
             System.out.println(spisMiast[i+1].toString());
         }
@@ -39,6 +38,7 @@ public class Main  {
         {
             System.out.println(spisPrzedmiotow[i+1].toString());
         }
+        */
         for(int i = 0; i < pop_size; i++)
         {
             populacja[i] = new Osobnik(capacityOfKnapsack, maxSpeed, minSpeed);
@@ -57,13 +57,29 @@ public class Main  {
         {
             System.out.println(spisPrzedmiotow[i+1].toString());
         }
-        int sumWag = 0;
+        /*int sumWag = 0;
+        int sumWag2 = 0;
         for(int i = 0; i < numberOfItems; i++)
         {
             if(spisPrzedmiotow[i+1].wziety) {
                 sumWag += spisPrzedmiotow[i+1].waga;
+                System.out.println("Index miasta: " + spisPrzedmiotow[i+1].idmiasta);
             }
         }
+        for(int i = 0; i<dimension; i++)
+        {
+            int j = 0;
+            System.out.print(populacja[1].trasa[i] + " ");
+        while (spisMiast[populacja[1].trasa[i]].listaPrzedmiotow.size()  > j+1) {
+            if (spisMiast[populacja[1].trasa[i]].listaPrzedmiotow.get(j).wziety) {
+                sumWag2 += spisMiast[populacja[1].trasa[i]].listaPrzedmiotow.get(j).waga;
+                System.out.println("Index miasta: " + spisMiast[populacja[1].trasa[i]].index);
+            }
+            j++;
+        }
+        }
+        System.out.println(sumWag);
+        System.out.println(sumWag2);*/
         /*System.out.println(sumWag);
         System.out.println("Czas podrozy: " + czasPodrozy(zlodziej));
         double CzasPodroży = czas(zlodziej);
@@ -91,15 +107,16 @@ public class Main  {
         for(int i = 0; i < zlodziej2.trasa.length; i++) {
             System.out.print(child2.trasa[i] + " ");
         }
-        System.out.println();
-        */
+        System.out.println();*/
+
+
         algorytmGenetyczny();
         }
 
 
     public static void wczytanieDanych() throws IOException
     {
-        String fileName = "C:\\Users\\dios1\\IdeaProjects\\SI1\\src\\easy_0.ttp";
+        String fileName = "C:\\Users\\dios1\\IdeaProjects\\SI1\\src\\hard_1.ttp";
         File file = new File(fileName);
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
@@ -194,8 +211,9 @@ public class Main  {
     }
     public static double czas(Osobnik z)
     {
+        z.Wc = 0;
         double suma = 0;
-        for(int i = 1; i < dimension+1; i++)
+        for(int i = 0; i < dimension; i++)
         {
             if(spisMiast[z.trasa[i]].listaPrzedmiotow.size() != 0) {
                 if (z.Wc < z.W) {
@@ -208,7 +226,7 @@ public class Main  {
                     }
                 }
             }
-            double d = spisMiast[z.trasa[i-1]].odleglosc(spisMiast[z.trasa[i]]);
+            double d = spisMiast[z.trasa[i]].odleglosc(spisMiast[z.trasa[i+1]]);
             double Vc = z.obecnapredkosc();
             double t = z.czas(Vc, d);
             suma += t;
@@ -348,11 +366,11 @@ public class Main  {
             {
                 liczba = rand.nextInt(pop_size);
             }
-            zawodnicy[i] = populacja[liczba];
+            zawodnicy[i] = new Osobnik(capacityOfKnapsack, maxSpeed, minSpeed, populacja[liczba].trasa);
             zawodnicyIndex[i] = liczba;
             pom[liczba] = true;
         }
-        for (int i = 0; i < zawodnicy.length-1; i++) {
+        /*for (int i = 0; i < zawodnicy.length-1; i++) {
             for (int j = 0; j < zawodnicy.length-1; j++) {
                 if (czas(zawodnicy[j]) < czas(zawodnicy[j + 1])) {
                     Osobnik temp = zawodnicy[j];
@@ -363,8 +381,17 @@ public class Main  {
                     zawodnicyIndex[j + 1] = temp2;
                 }
             }
+        }*/
+        double naj = czas(zawodnicy[0]);
+        int najIndex = zawodnicyIndex[0];
+        for (int i = 1; i < zawodnicy.length; i++) {
+
+            if (naj > czas(zawodnicy[i])) {
+                naj = czas(zawodnicy[i]);
+                najIndex = zawodnicyIndex[i];
+            }
         }
-        return zawodnicyIndex[0];
+        return najIndex;
     }
 
     public static void selekcja()
@@ -418,8 +445,19 @@ public class Main  {
             return suma/pop_size;
     }
 
-    public static void algorytmGenetyczny()
-    {
+    public static void algorytmGenetyczny() throws IOException {
+        LocalTime today = LocalTime.now();
+        LocalDate today2 = LocalDate.now();
+
+        String nazwaPliku = today.getHour() + "-" + today.getMinute()+ "-" +today.getSecond() + "-" + today2.getYear() + "-" + today2.getMonth()+ "-" +today2.getDayOfMonth() + ".txt";
+        try (PrintWriter writer = new PrintWriter(new File(nazwaPliku))) {
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("Najlepsze,");
+            sb.append("Srednie,");
+            sb.append("Najgorsze");
+            sb.append('\n');
+
 
         int numerGeneracji = 1;
         while(numerGeneracji < gen)
@@ -436,6 +474,12 @@ public class Main  {
             krzyzowanie();
             mutacja();
             System.out.println("W generacji numer: " + numerGeneracji + " Najlepszy wynik: " + (profit() - najlepszy()) + " średni wynik: " + sredniaPopulacji() + " najgorszy wynik: " + (profit() - najgorszy()));
+            sb.append((profit() - najlepszy()));
+            sb.append(',');
+            sb.append(sredniaPopulacji());
+            sb.append(',');
+            sb.append((profit() - najgorszy()));
+            sb.append('\n');
             for(int i = 0; i < pop_size; i++)
             {
                 populacja[i] = new Osobnik(capacityOfKnapsack, maxSpeed, minSpeed, nowaPopulacja[i].trasa);
@@ -452,8 +496,19 @@ public class Main  {
             System.out.println();
              */
         }
-        System.out.println("W generacji numer: " + numerGeneracji + " Najlepszy wynik: " + (profit() - czas(populacja[pop_size-1])) + " średni wynik: " + sredniaPopulacji() + " najgorszy wynik: " + (profit() - czas(populacja[0])));
-    }
+        System.out.println("W generacji numer: " + numerGeneracji + " Najlepszy wynik: " + (profit() - najlepszy()) + " średni wynik: " + sredniaPopulacji() + " najgorszy wynik: " + (profit() - najgorszy()));
+            sb.append((profit() - najlepszy()));
+            sb.append(',');
+            sb.append(sredniaPopulacji());
+            sb.append(',');
+            sb.append((profit() - najgorszy()));
+            sb.append('\n');
+            writer.write(sb.toString());
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        }
+
 
     }
 
