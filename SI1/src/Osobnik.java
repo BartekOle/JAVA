@@ -57,7 +57,7 @@ public class Osobnik implements Cloneable {
 
     public double obecnapredkosc()
     {
-        double Vc = Vmax - Wc * ((Vmax - Vmin)/W);
+        double Vc = Vmax - (Wc * ((Vmax - Vmin)/W));
         return Vc;
     }
 

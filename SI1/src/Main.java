@@ -20,13 +20,14 @@ public class Main  {
         static private Przedmiot [] spisPrzedmiotow;
         static private Osobnik [] populacja;
         static private Osobnik [] nowaPopulacja;
+        static private double [][] odleglosci;
     public static void main(String[] args) throws IOException  {
 
-        pop_size = 100;
+        pop_size = 1500;
         gen = 100;
-        tour = 5;
+        tour = 70;
         Px = 0.7;
-        Pm = 0.01;
+        Pm = 0.2;
         populacja = new Osobnik[pop_size];
         nowaPopulacja = new Osobnik[pop_size];
         wczytanieDanych();
@@ -49,10 +50,12 @@ public class Main  {
         for(int i = 0; i < zlodziej.trasa.length; i++) {
             System.out.print(zlodziej.trasa[i] + " ");
         }*/
+        odleglosci = new double [dimension+1][dimension+1];
         System.out.println();
         sortowanie();
         wypelnieniePrzedmioty();
         wypelnienieMiast();
+        wypelnienieOdleglosci();
         for(int i = 0; i < numberOfItems; i++)
         {
             System.out.println(spisPrzedmiotow[i+1].toString());
@@ -111,12 +114,13 @@ public class Main  {
 
 
         algorytmGenetyczny();
+        System.out.println("Wynik dla algorytmu zachałannego: " + metodaZachlanna());
         }
 
 
     public static void wczytanieDanych() throws IOException
     {
-        String fileName = "C:\\Users\\dios1\\IdeaProjects\\SI1\\src\\hard_1.ttp";
+        String fileName = "C:\\Users\\dios1\\IdeaProjects\\SI1\\src\\hard_2.ttp";
         File file = new File(fileName);
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
@@ -201,6 +205,16 @@ public class Main  {
             }
     }
 
+    public static void wypelnienieOdleglosci()
+    {
+        for(int i = 1; i < dimension+1; i++)
+        {
+            for(int j = 1; j < dimension+1; j++) {
+                odleglosci[i][j] = spisMiast[i].odleglosc(spisMiast[j]);
+            }
+        }
+    }
+
     public static void wypelnienieMiast()
     {
         for(int i = 0; i < dimension; i++)
@@ -226,7 +240,7 @@ public class Main  {
                     }
                 }
             }
-            double d = spisMiast[z.trasa[i]].odleglosc(spisMiast[z.trasa[i+1]]);
+            double d =  odleglosci[z.trasa[i]][z.trasa[i+1]];
             double Vc = z.obecnapredkosc();
             double t = z.czas(Vc, d);
             suma += t;
@@ -275,8 +289,8 @@ public class Main  {
     {
         Osobnik child1 = new Osobnik(capacityOfKnapsack, maxSpeed, minSpeed);
         Osobnik child2 = new Osobnik(capacityOfKnapsack, maxSpeed, minSpeed);
-        child1.chromoson(dimension);
-        child2.chromoson(dimension);
+        child1.trasa = new int[dimension+1]; ///child1.chromoson(dimension);
+        child2.trasa = new int[dimension+1];///child2.chromoson(dimension);
         Random rand = new Random();
         for(int j = 0; j < pop_size; j+=2) {
             Osobnik o1 = nowaPopulacja[j];
@@ -297,16 +311,16 @@ public class Main  {
                 for (int i = 0; i < pom2.length; i++) {
                     pom2[i] = 0;
                 }
-                for (int i = range1; i <= range2; i++) {
+                for (int i = range1; i < range2; i++) {
                     child1.trasa[i] = o1.trasa[i];
                     child2.trasa[i] = o2.trasa[i];
                     pom[o1.trasa[i]] = 1;
                     pom2[o2.trasa[i]] = 1;
                 }
 
-                int index = range2 + 1;
-                int index2 = range2 + 1;
-                int index3 = range2 + 1;
+                int index = range2;
+                int index2 = range2;
+                int index3 = range2;
                 while (index != range1) {
                     if (index == dimension) {
                         index = 0;
@@ -404,7 +418,7 @@ public class Main  {
 
     public static void sortowaniePopulacji() {
         for (int i = 0; i < populacja.length - 1; i++) {
-            for (int j = 0; j < populacja.length - 1; j++) {
+            for (int j = 0; j < populacja.length - i; j++) {
                 if (czas(populacja[j]) < czas(populacja[j + 1])) {
                     Osobnik temp = populacja[j];
                     populacja[j] = populacja[j + 1];
@@ -445,6 +459,55 @@ public class Main  {
             return suma/pop_size;
     }
 
+    public static double metodaZachlanna() {
+        Osobnik zlodziej = new Osobnik(capacityOfKnapsack, maxSpeed, minSpeed);
+        zlodziej.trasa = new int[dimension + 1];
+        int pom[] = new int[dimension+1];
+        double [] naj = new double[dimension];
+        int [] najIndex = new int[dimension];
+        zlodziej.trasa[0] = 1;
+        zlodziej.trasa[zlodziej.trasa.length-1] = 1;
+        for(int i = 1; i < zlodziej.trasa.length; i++)
+        {
+            pom[i] = 0;
+        }
+        pom[1] = 1;
+        for(int k = 0; k < zlodziej.trasa.length-2; k++) {
+            for(int l = 0; l < naj.length; l++)
+            {
+                naj[l] = odleglosci[zlodziej.trasa[k]][l+1];
+                najIndex[l] = l+1;
+            }
+            for (int i = 0; i < naj.length - 1; i++) {
+                for (int j = 0; j < naj.length - 1; j++) {
+                    if (naj[j] > naj[j + 1]) {
+                        double temp = naj[j];
+                        naj[j] = naj[j + 1];
+                        naj[j + 1] = temp;
+                        int temp2 = najIndex[j];
+                        najIndex[j] = najIndex[j + 1];
+                        najIndex[j + 1] = temp2;
+                    }
+                }
+            }
+            int index = 1;
+            while(pom[najIndex[index]] != 0)
+            {
+                index++;
+            }
+            zlodziej.trasa[k+1] = najIndex[index];
+            pom[najIndex[index]] = najIndex[index];
+        }
+
+        for(int i = 0; i < zlodziej.trasa.length; i++)
+        {
+            System.out.print(zlodziej.trasa[i] + " ");
+        }
+
+        return (profit() - czas(zlodziej));
+
+    }
+
     public static void algorytmGenetyczny() throws IOException {
         LocalTime today = LocalTime.now();
         LocalDate today2 = LocalDate.now();
@@ -470,9 +533,6 @@ public class Main  {
                 System.out.println();
             }
             System.out.println();
-            selekcja();
-            krzyzowanie();
-            mutacja();
             System.out.println("W generacji numer: " + numerGeneracji + " Najlepszy wynik: " + (profit() - najlepszy()) + " średni wynik: " + sredniaPopulacji() + " najgorszy wynik: " + (profit() - najgorszy()));
             sb.append((profit() - najlepszy()));
             sb.append(',');
@@ -480,6 +540,11 @@ public class Main  {
             sb.append(',');
             sb.append((profit() - najgorszy()));
             sb.append('\n');
+
+            selekcja();
+            krzyzowanie();
+            mutacja();
+
             for(int i = 0; i < pop_size; i++)
             {
                 populacja[i] = new Osobnik(capacityOfKnapsack, maxSpeed, minSpeed, nowaPopulacja[i].trasa);
