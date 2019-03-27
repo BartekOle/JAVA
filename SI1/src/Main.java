@@ -5,122 +5,53 @@ import java.util.Collections;
 import java.util.Random;
 
 public class Main  {
-        static private int dimension;
-        static private int numberOfItems;
-        static private int capacityOfKnapsack;
-        static private int pop_size;
-        static private int gen;
-        static private int tour;
-        static private double Px;
-        static private double Pm;
-        static private double minSpeed;
-        static private double maxSpeed;
-        static private double rentingRatio;
-        static private Miasto [] spisMiast;
-        static private Przedmiot [] spisPrzedmiotow;
-        static private Osobnik [] populacja;
-        static private Osobnik [] nowaPopulacja;
-        static private double [][] odleglosci;
+    static private int wymiar;
+    static private int liczbaPrzedmiotow;
+    static private int pojemnoscPlecaka;
+    static private int pop_size;
+    static private int gen;
+    static private int tour;
+    static private double Px;
+    static private double Pm;
+    static private double minPredkosc;
+    static private double maxPredkosc;
+    static private double wspolczynnikWynajmu;
+    static private Miasto [] spisMiast;
+    static private Przedmiot [] spisPrzedmiotow;
+    static private Osobnik [] populacja;
+    static private Osobnik [] nowaPopulacja;
+    static private double [][] odleglosci;
     public static void main(String[] args) throws IOException  {
 
-        pop_size = 1500;
+        pop_size = 100;
         gen = 100;
-        tour = 70;
+        tour = 10;
         Px = 0.7;
         Pm = 0.2;
         populacja = new Osobnik[pop_size];
         nowaPopulacja = new Osobnik[pop_size];
         wczytanieDanych();
-        /*for(int i = 0; i < dimension; i++)
-        {
-            System.out.println(spisMiast[i+1].toString());
-        }
-        for(int i = 0; i < numberOfItems; i++)
-        {
-            System.out.println(spisPrzedmiotow[i+1].toString());
-        }
-        */
         for(int i = 0; i < pop_size; i++)
         {
-            populacja[i] = new Osobnik(capacityOfKnapsack, maxSpeed, minSpeed);
-            populacja[i].chromoson(dimension);
+            populacja[i] = new Osobnik(pojemnoscPlecaka, maxPredkosc, minPredkosc);
+            populacja[i].chromoson(wymiar);
         }
-        /*Osobnik zlodziej = new Osobnik(capacityOfKnapsack, maxSpeed, minSpeed);
-        zlodziej.chromoson(dimension);
-        for(int i = 0; i < zlodziej.trasa.length; i++) {
-            System.out.print(zlodziej.trasa[i] + " ");
-        }*/
-        odleglosci = new double [dimension+1][dimension+1];
+        odleglosci = new double [wymiar+1][wymiar+1];
         System.out.println();
         sortowanie();
         wypelnieniePrzedmioty();
         wypelnienieMiast();
         wypelnienieOdleglosci();
-        for(int i = 0; i < numberOfItems; i++)
-        {
-            System.out.println(spisPrzedmiotow[i+1].toString());
-        }
-        /*int sumWag = 0;
-        int sumWag2 = 0;
-        for(int i = 0; i < numberOfItems; i++)
-        {
-            if(spisPrzedmiotow[i+1].wziety) {
-                sumWag += spisPrzedmiotow[i+1].waga;
-                System.out.println("Index miasta: " + spisPrzedmiotow[i+1].idmiasta);
-            }
-        }
-        for(int i = 0; i<dimension; i++)
-        {
-            int j = 0;
-            System.out.print(populacja[1].trasa[i] + " ");
-        while (spisMiast[populacja[1].trasa[i]].listaPrzedmiotow.size()  > j+1) {
-            if (spisMiast[populacja[1].trasa[i]].listaPrzedmiotow.get(j).wziety) {
-                sumWag2 += spisMiast[populacja[1].trasa[i]].listaPrzedmiotow.get(j).waga;
-                System.out.println("Index miasta: " + spisMiast[populacja[1].trasa[i]].index);
-            }
-            j++;
-        }
-        }
-        System.out.println(sumWag);
-        System.out.println(sumWag2);*/
-        /*System.out.println(sumWag);
-        System.out.println("Czas podrozy: " + czasPodrozy(zlodziej));
-        double CzasPodroży = czas(zlodziej);
-        System.out.println("Czas podróży: " + CzasPodroży);
-        double ProfitPodróży = profit();
-        System.out.println("Łaczna wartość przedmiotów: " + ProfitPodróży);
-        System.out.println("Wynik G(x, y) algortymu zachłannego " + (ProfitPodróży - CzasPodroży));
-        for(int i = 0; i < numberOfItems; i++)
-        {
-            if(spisPrzedmiotow[i+1].wziety) {
-                System.out.println(spisPrzedmiotow[i + 1].toString());
-            }
-        }
-        Osobnik zlodziej2 = new Osobnik(capacityOfKnapsack, maxSpeed, minSpeed);
-        zlodziej2.chromoson(dimension);
-        for(int i = 0; i < zlodziej2.trasa.length; i++) {
-            System.out.print(zlodziej2.trasa[i] + " ");
-        }
-        System.out.println();
-        krzyzowanie(zlodziej, zlodziej2);
-        for(int i = 0; i < zlodziej.trasa.length; i++) {
-            System.out.print(child1.trasa[i] + " ");
-        }
-        System.out.println();
-        for(int i = 0; i < zlodziej2.trasa.length; i++) {
-            System.out.print(child2.trasa[i] + " ");
-        }
-        System.out.println();*/
 
 
         algorytmGenetyczny();
-        System.out.println("Wynik dla algorytmu zachałannego: " + metodaZachlanna());
-        }
+        System.out.println("Wynik dla algorytmu zachłannego: " + metodaZachlanna());
+    }
 
 
     public static void wczytanieDanych() throws IOException
     {
-        String fileName = "C:\\Users\\dios1\\IdeaProjects\\SI1\\src\\hard_2.ttp";
+        String fileName = "C:\\Users\\dios1\\IdeaProjects\\SI1\\src\\hard_0.ttp";
         File file = new File(fileName);
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
@@ -129,34 +60,34 @@ public class Main  {
         br.readLine();
         line = br.readLine();
         String[] split = line.split("(\\s)+");
-        dimension = Integer.parseInt(split[1]);
+        wymiar = Integer.parseInt(split[1]);
         line = br.readLine();
         split = line.split("(\\s)+");
-        numberOfItems = Integer.parseInt(split[3]);
+        liczbaPrzedmiotow = Integer.parseInt(split[3]);
         line = br.readLine();
         split = line.split("(\\s)+");
-        capacityOfKnapsack = Integer.parseInt(split[3]);
+        pojemnoscPlecaka = Integer.parseInt(split[3]);
         line = br.readLine();
         split = line.split("(\\s)+");
-        minSpeed = Double.parseDouble(split[2]);
+        minPredkosc = Double.parseDouble(split[2]);
         line = br.readLine();
         split = line.split("(\\s)+");
-        maxSpeed = Double.parseDouble(split[2]);
+        maxPredkosc = Double.parseDouble(split[2]);
         line = br.readLine();
         split = line.split("(\\s)+");
-        rentingRatio = Double.parseDouble(split[2]);
-        spisMiast = new Miasto[dimension + 1];
-        spisPrzedmiotow = new Przedmiot[numberOfItems + 1];
+        wspolczynnikWynajmu = Double.parseDouble(split[2]);
+        spisMiast = new Miasto[wymiar + 1];
+        spisPrzedmiotow = new Przedmiot[liczbaPrzedmiotow + 1];
         br.readLine();
         br.readLine();
-        for(int i = 0; i < dimension; i++)
+        for(int i = 0; i < wymiar; i++)
         {
             line = br.readLine();
             split = line.split("(\\s)+");
             spisMiast[i+1] = new Miasto(Integer.parseInt(split[0]), Double.parseDouble(split[1]), Double.parseDouble(split[2]));
         }
         br.readLine();
-        for(int i = 0; i < numberOfItems; i++)
+        for(int i = 0; i < liczbaPrzedmiotow; i++)
         {
             line = br.readLine();
             split = line.split("(\\s)+");
@@ -168,7 +99,7 @@ public class Main  {
     public static double czasPodrozy(Osobnik z)
     {
         double suma = 0;
-        for(int i = 0; i < dimension; i++)
+        for(int i = 0; i < wymiar; i++)
         {
             double d = spisMiast[z.trasa[i]].odleglosc(spisMiast[z.trasa[i+1]]);
             double Vc = z.obecnapredkosc();
@@ -183,7 +114,7 @@ public class Main  {
     public static void sortowanie() {
         for (int i = 1; i < spisPrzedmiotow.length-1; i++) {
             for (int j = 1; j < spisPrzedmiotow.length-1; j++) {
-                if (spisPrzedmiotow[j].getProfit() > spisPrzedmiotow[j + 1].getProfit()) {
+                if (spisPrzedmiotow[j].dostanProfit() > spisPrzedmiotow[j + 1].dostanProfit()) {
                     Przedmiot temp = spisPrzedmiotow[j];
                     spisPrzedmiotow[j] = spisPrzedmiotow[j + 1];
                     spisPrzedmiotow[j + 1] = temp;
@@ -193,23 +124,23 @@ public class Main  {
     }
 
     public static void wypelnieniePrzedmioty() {
-            int dopuszczalnaWaga = 0;
-            int index = 1;
-            while(dopuszczalnaWaga != capacityOfKnapsack && spisPrzedmiotow.length > index)
-            {
-                if (dopuszczalnaWaga + spisPrzedmiotow[index].waga <= capacityOfKnapsack) {
-                    spisPrzedmiotow[index].wziety = true;
-                    dopuszczalnaWaga +=  spisPrzedmiotow[index].waga;
-                }
-                index++;
+        int dopuszczalnaWaga = 0;
+        int index = 1;
+        while(dopuszczalnaWaga != pojemnoscPlecaka && spisPrzedmiotow.length > index)
+        {
+            if (dopuszczalnaWaga + spisPrzedmiotow[index].waga <= pojemnoscPlecaka) {
+                spisPrzedmiotow[index].wziety = true;
+                dopuszczalnaWaga +=  spisPrzedmiotow[index].waga;
             }
+            index++;
+        }
     }
 
     public static void wypelnienieOdleglosci()
     {
-        for(int i = 1; i < dimension+1; i++)
+        for(int i = 1; i < wymiar+1; i++)
         {
-            for(int j = 1; j < dimension+1; j++) {
+            for(int j = 1; j < wymiar+1; j++) {
                 odleglosci[i][j] = spisMiast[i].odleglosc(spisMiast[j]);
             }
         }
@@ -217,7 +148,7 @@ public class Main  {
 
     public static void wypelnienieMiast()
     {
-        for(int i = 0; i < dimension; i++)
+        for(int i = 0; i < wymiar; i++)
         {
             spisMiast[i+1].przedmioty(spisPrzedmiotow);
             Collections.sort(spisMiast[i+1].listaPrzedmiotow);
@@ -227,16 +158,16 @@ public class Main  {
     {
         z.Wc = 0;
         double suma = 0;
-        for(int i = 0; i < dimension; i++)
+        for(int i = 0; i < wymiar; i++)
         {
             if(spisMiast[z.trasa[i]].listaPrzedmiotow.size() != 0) {
                 if (z.Wc < z.W) {
                     int j = 0;
                     while (spisMiast[z.trasa[i]].listaPrzedmiotow.size()  > j+1) {
-                    if (spisMiast[z.trasa[i]].listaPrzedmiotow.get(j).wziety) {
-                        z.Wc += spisMiast[z.trasa[i]].listaPrzedmiotow.get(j).waga;
-                    }
-                    j++;
+                        if (spisMiast[z.trasa[i]].listaPrzedmiotow.get(j).wziety) {
+                            z.Wc += spisMiast[z.trasa[i]].listaPrzedmiotow.get(j).waga;
+                        }
+                        j++;
                     }
                 }
             }
@@ -251,7 +182,7 @@ public class Main  {
     public static double profit()
     {
         double prof = 0;
-        for(int i = 0; i < numberOfItems; i++)
+        for(int i = 0; i < liczbaPrzedmiotow; i++)
         {
             if(spisPrzedmiotow[i+1].wziety) {
                 prof += spisPrzedmiotow[i + 1].wartosc;
@@ -268,18 +199,18 @@ public class Main  {
             double liczba = rand.nextDouble();
             if(liczba <= Pm)
             {
-                int cyfra1 = rand.nextInt(dimension);
-                int cyfra2 = rand.nextInt(dimension);
+                int cyfra1 = rand.nextInt(wymiar);
+                int cyfra2 = rand.nextInt(wymiar);
                 while(cyfra1 == cyfra2)
                 {
-                    cyfra2 = rand.nextInt(dimension);
+                    cyfra2 = rand.nextInt(wymiar);
                 }
                 int pom = nowaPopulacja[i].trasa[cyfra1];
                 nowaPopulacja[i].trasa[cyfra1] = nowaPopulacja[i].trasa[cyfra2];
                 nowaPopulacja[i].trasa[cyfra2] = pom;
                 if(cyfra1 == 0)
                 {
-                    nowaPopulacja[i].trasa[dimension] = nowaPopulacja[i].trasa[0];
+                    nowaPopulacja[i].trasa[wymiar] = nowaPopulacja[i].trasa[0];
                 }
             }
         }
@@ -287,27 +218,27 @@ public class Main  {
 
     public static void krzyzowanie()
     {
-        Osobnik child1 = new Osobnik(capacityOfKnapsack, maxSpeed, minSpeed);
-        Osobnik child2 = new Osobnik(capacityOfKnapsack, maxSpeed, minSpeed);
-        child1.trasa = new int[dimension+1]; ///child1.chromoson(dimension);
-        child2.trasa = new int[dimension+1];///child2.chromoson(dimension);
+        Osobnik child1 = new Osobnik(pojemnoscPlecaka, maxPredkosc, minPredkosc);
+        Osobnik child2 = new Osobnik(pojemnoscPlecaka, maxPredkosc, minPredkosc);
+        child1.trasa = new int[wymiar+1]; ///child1.chromoson(wymiar);
+        child2.trasa = new int[wymiar+1];///child2.chromoson(wymiar);
         Random rand = new Random();
         for(int j = 0; j < pop_size; j+=2) {
             Osobnik o1 = nowaPopulacja[j];
             Osobnik o2 = nowaPopulacja[j+1];
             double liczba = rand.nextDouble();
             if (liczba <= Px) {
-                int range = dimension / 2;
+                int range = wymiar / 2;
                 if (range % 2 != 0) {
                     range++;
                 }
                 int range1 = range / 2;
                 int range2 = range1 + range;
-                int pom[] = new int[dimension + 1];
+                int pom[] = new int[wymiar + 1];
                 for (int i = 0; i < pom.length; i++) {
                     pom[i] = 0;
                 }
-                int pom2[] = new int[dimension + 1];
+                int pom2[] = new int[wymiar + 1];
                 for (int i = 0; i < pom2.length; i++) {
                     pom2[i] = 0;
                 }
@@ -322,24 +253,24 @@ public class Main  {
                 int index2 = range2;
                 int index3 = range2;
                 while (index != range1) {
-                    if (index == dimension) {
+                    if (index == wymiar) {
                         index = 0;
                     }
-                    if (index2 == dimension) {
+                    if (index2 == wymiar) {
                         index2 = 0;
                     }
-                    if (index3 == dimension) {
+                    if (index3 == wymiar) {
                         index3 = 0;
                     }
                     while (pom[o2.trasa[index2]] != 0) {
                         index2++;
-                        if (index2 == dimension) {
+                        if (index2 == wymiar) {
                             index2 = 0;
                         }
                     }
                     while (pom2[o1.trasa[index3]] != 0) {
                         index3++;
-                        if (index3 == dimension) {
+                        if (index3 == wymiar) {
                             index3 = 0;
                         }
                     }
@@ -349,15 +280,15 @@ public class Main  {
                     pom2[o1.trasa[index3]] = 1;
                     index++;
                 }
-                child1.trasa[dimension] = child1.trasa[0];
-                child2.trasa[dimension] = child2.trasa[0];
+                child1.trasa[wymiar] = child1.trasa[0];
+                child2.trasa[wymiar] = child2.trasa[0];
             } else {
                 child1.trasa = o1.trasa;
                 child2.trasa = o2.trasa;
             }
 
-            nowaPopulacja[j] = new Osobnik(capacityOfKnapsack, maxSpeed, minSpeed, child1.trasa);
-            nowaPopulacja[j+1] = new Osobnik(capacityOfKnapsack, maxSpeed, minSpeed, child2.trasa);
+            nowaPopulacja[j] = new Osobnik(pojemnoscPlecaka, maxPredkosc, minPredkosc, child1.trasa);
+            nowaPopulacja[j+1] = new Osobnik(pojemnoscPlecaka, maxPredkosc, minPredkosc, child2.trasa);
         }
     }
 
@@ -380,7 +311,7 @@ public class Main  {
             {
                 liczba = rand.nextInt(pop_size);
             }
-            zawodnicy[i] = new Osobnik(capacityOfKnapsack, maxSpeed, minSpeed, populacja[liczba].trasa);
+            zawodnicy[i] = new Osobnik(pojemnoscPlecaka, maxPredkosc, minPredkosc, populacja[liczba].trasa);
             zawodnicyIndex[i] = liczba;
             pom[liczba] = true;
         }
@@ -408,11 +339,65 @@ public class Main  {
         return najIndex;
     }
 
+    public static void ruletka()
+    {
+        Random rand = new Random();
+        double [] procenty = new double[pop_size];
+        double suma = 0;
+        double sumaProcent = 0;
+        double profit = profit();
+        for(int i = 0; i < pop_size; i++)
+        {
+            double wynik = profit - czas(populacja[i]);
+            if(wynik < 0)
+            {
+                suma += 1/Math.abs(wynik);
+            }
+            else
+            {
+                suma += wynik;
+            }
+        }
+        for(int i = 0; i < pop_size; i++)
+        {
+            double wynik = profit - czas(populacja[i]);
+            if(wynik < 0)
+            {
+                procenty[i] =  sumaProcent + ((1/Math.abs(wynik))/suma);
+                sumaProcent += (1/Math.abs(wynik))/suma;
+            }
+            else
+            {
+                procenty[i] =  sumaProcent + (wynik/suma);
+                sumaProcent += wynik/suma;
+            }
+
+        }
+        for(int i = 0; i < pop_size; i++)
+        {
+            int index = 0;
+            double liczba = rand.nextDouble();
+            if(liczba <= procenty[index])
+            {
+                nowaPopulacja[i] = new Osobnik(pojemnoscPlecaka, maxPredkosc, minPredkosc, populacja[index].trasa);
+            }
+            else
+            {
+                index++;
+                while(liczba > procenty[index] || liczba <= procenty[index-1])
+                {
+                    index++;
+                }
+                nowaPopulacja[i] = new Osobnik(pojemnoscPlecaka, maxPredkosc, minPredkosc, populacja[index].trasa);
+            }
+        }
+    }
+
     public static void selekcja()
     {
         for(int i = 0; i < pop_size; i++)
         {
-            nowaPopulacja[i] = new Osobnik(capacityOfKnapsack, maxSpeed, minSpeed, populacja[turniej()].trasa);
+            nowaPopulacja[i] = new Osobnik(pojemnoscPlecaka, maxPredkosc, minPredkosc, populacja[turniej()].trasa);
         }
     }
 
@@ -432,10 +417,10 @@ public class Main  {
         double naj = czas(populacja[0]);
         for (int i = 1; i < populacja.length; i++) {
 
-                if (naj > czas(populacja[i])) {
-                    naj = czas(populacja[i]);
-                }
+            if (naj > czas(populacja[i])) {
+                naj = czas(populacja[i]);
             }
+        }
         return naj;
     }
 
@@ -451,20 +436,20 @@ public class Main  {
     }
 
     public static double sredniaPopulacji() {
-            double profit = profit();
-            double suma = 0;
-            for (int i = 0; i < populacja.length; i++) {
-               suma += profit - czas(populacja[i]);
-                }
-            return suma/pop_size;
+        double profit = profit();
+        double suma = 0;
+        for (int i = 0; i < populacja.length; i++) {
+            suma += profit - czas(populacja[i]);
+        }
+        return suma/pop_size;
     }
 
     public static double metodaZachlanna() {
-        Osobnik zlodziej = new Osobnik(capacityOfKnapsack, maxSpeed, minSpeed);
-        zlodziej.trasa = new int[dimension + 1];
-        int pom[] = new int[dimension+1];
-        double [] naj = new double[dimension];
-        int [] najIndex = new int[dimension];
+        Osobnik zlodziej = new Osobnik(pojemnoscPlecaka, maxPredkosc, minPredkosc);
+        zlodziej.trasa = new int[wymiar + 1];
+        int pom[] = new int[wymiar+1];
+        double [] naj = new double[wymiar];
+        int [] najIndex = new int[wymiar];
         zlodziej.trasa[0] = 1;
         zlodziej.trasa[zlodziej.trasa.length-1] = 1;
         for(int i = 1; i < zlodziej.trasa.length; i++)
@@ -509,10 +494,10 @@ public class Main  {
     }
 
     public static void algorytmGenetyczny() throws IOException {
-        LocalTime today = LocalTime.now();
-        LocalDate today2 = LocalDate.now();
+        LocalTime dzisiaj = LocalTime.now();
+        LocalDate dzisiaj2 = LocalDate.now();
 
-        String nazwaPliku = today.getHour() + "-" + today.getMinute()+ "-" +today.getSecond() + "-" + today2.getYear() + "-" + today2.getMonth()+ "-" +today2.getDayOfMonth() + ".txt";
+        String nazwaPliku = dzisiaj.getHour() + "-" + dzisiaj.getMinute()+ "-" +dzisiaj.getSecond() + "-" + dzisiaj2.getYear() + "-" + dzisiaj2.getMonth()+ "-" +dzisiaj2.getDayOfMonth() + ".txt";
         try (PrintWriter writer = new PrintWriter(new File(nazwaPliku))) {
 
             StringBuilder sb = new StringBuilder();
@@ -522,46 +507,38 @@ public class Main  {
             sb.append('\n');
 
 
-        int numerGeneracji = 1;
-        while(numerGeneracji < gen)
-        {
-            System.out.println();
-            for(int i = 0; i < 10; i++) {
-                for(int j = 0; j < dimension+1; j++) {
-                    System.out.print(populacja[i].trasa[j] + " ");
-                }
-                System.out.println();
-            }
-            System.out.println();
-            System.out.println("W generacji numer: " + numerGeneracji + " Najlepszy wynik: " + (profit() - najlepszy()) + " średni wynik: " + sredniaPopulacji() + " najgorszy wynik: " + (profit() - najgorszy()));
-            sb.append((profit() - najlepszy()));
-            sb.append(',');
-            sb.append(sredniaPopulacji());
-            sb.append(',');
-            sb.append((profit() - najgorszy()));
-            sb.append('\n');
-
-            selekcja();
-            krzyzowanie();
-            mutacja();
-
-            for(int i = 0; i < pop_size; i++)
+            int numerGeneracji = 1;
+            while(numerGeneracji < gen)
             {
-                populacja[i] = new Osobnik(capacityOfKnapsack, maxSpeed, minSpeed, nowaPopulacja[i].trasa);
-            }
-
-            numerGeneracji++;
-            /*
-             for(int i = 0; i < 10; i++) {
-                for(int j = 0; j < dimension+1; j++) {
-                    System.out.print(nowaPopulacja[i].trasa[j] + " ");
-                }
                 System.out.println();
+               /* for(int i = 0; i < 10; i++) {
+                    for(int j = 0; j < wymiar+1; j++) {
+                        System.out.print(populacja[i].trasa[j] + " ");
+                    }
+                    System.out.println();
+                }*/
+                System.out.println();
+                System.out.println("W generacji numer: " + numerGeneracji + " Najlepszy wynik: " + (profit() - najlepszy()) + " średni wynik: " + sredniaPopulacji() + " najgorszy wynik: " + (profit() - najgorszy()));
+                sb.append((profit() - najlepszy()));
+                sb.append(',');
+                sb.append(sredniaPopulacji());
+                sb.append(',');
+                sb.append((profit() - najgorszy()));
+                sb.append('\n');
+
+                selekcja();
+                krzyzowanie();
+                mutacja();
+
+                for(int i = 0; i < pop_size; i++)
+                {
+                    populacja[i] = new Osobnik(pojemnoscPlecaka, maxPredkosc, minPredkosc, nowaPopulacja[i].trasa);
+                }
+
+                numerGeneracji++;
+
             }
-            System.out.println();
-             */
-        }
-        System.out.println("W generacji numer: " + numerGeneracji + " Najlepszy wynik: " + (profit() - najlepszy()) + " średni wynik: " + sredniaPopulacji() + " najgorszy wynik: " + (profit() - najgorszy()));
+            System.out.println("W generacji numer: " + numerGeneracji + " Najlepszy wynik: " + (profit() - najlepszy()) + " średni wynik: " + sredniaPopulacji() + " najgorszy wynik: " + (profit() - najgorszy()));
             sb.append((profit() - najlepszy()));
             sb.append(',');
             sb.append(sredniaPopulacji());
@@ -572,10 +549,10 @@ public class Main  {
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
-        }
-
-
     }
+
+
+}
 
 
 

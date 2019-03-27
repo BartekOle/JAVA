@@ -20,15 +20,15 @@ public class Przedmiot implements Comparable<Przedmiot> {
         return "index: " +  index + " wartosc: " + wartosc + " waga: " + waga + " idmiasta: " + idmiasta + " wziete: " + wziety;
     }
 
-    public Double getProfit() {
+    public Double dostanProfit() {
         return (double) wartosc/waga;
     }
 
     @Override
     public int compareTo(Przedmiot p) {
-        if (getProfit() == null || p.getProfit() == null) {
+        if (dostanProfit() == null || p.dostanProfit() == null) {
             return 0;
         }
-        return getProfit().compareTo(p.getProfit());
+        return dostanProfit().compareTo(p.dostanProfit());
     }
 }
