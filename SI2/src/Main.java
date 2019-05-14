@@ -38,7 +38,7 @@ public class Main {
             }
             System.out.println();
         }
-        System.out.println(rozwiazanie.przeszukiwaniePrzyrostoweZPowrotem());
+        System.out.println(rozwiazanie.sprawdzanieWprzod());
         for(int i =1; i < rozwiazanie.rozmiar+1; i++)
         {
             for(int j = 1; j < rozwiazanie.rozmiar+1; j++)

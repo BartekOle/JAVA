@@ -34,7 +34,7 @@ public class PlanszaFuto {
 
     public  void wczytanieDanychFuto() throws IOException
     {
-        String fileName = "C:\\Users\\dios1\\IdeaProjects\\SI2\\src\\test_futo_9_2.txt";
+        String fileName = "C:\\Users\\dios1\\IdeaProjects\\SI2\\src\\test_futo_9_1.txt";
         File file = new File(fileName);
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
@@ -188,8 +188,11 @@ public class PlanszaFuto {
         return true;
     }
 
+
+
     public boolean przeszukiwaniePrzyrostoweZPowrotem()
     {
+
         int obecnyNumerPola = 1;
         PoleFuto obecnePole = plansza[1][1];
         int obecnieSprawdzaWartosc = 1;
@@ -231,6 +234,7 @@ public class PlanszaFuto {
                                 {
                                     obecnePole = obecnePole.poprzedniePole;
                                 }
+                            System.out.println("Cofniecie do pola numer: " + obecnePole.nrPola);
                             obecnyNumerPola = obecnePole.numerWKolejnosci;
                             if (obecnePole.wartosc == rozmiar) {
                                 obecnieSprawdzaWartosc = 1;
@@ -246,7 +250,305 @@ public class PlanszaFuto {
                     obecnieSprawdzaWartosc = obecnePole.wartosc + 1;
                 }
             }
+            System.out.println("Zapisanie wartosci dla pola numer: " + obecnePole.nrPola + " Wartosc wyniosla: " + obecnePole.wartosc);
             obecnePole = obecnePole.nastepnePole;
+            obecnyNumerPola++;
+        }
+        return true;
+    }
+
+    public void usunDostepneCyfry(int i, int j) {
+        for (int k = j + 1; k < this.rozmiar + 1; k++) {
+            this.plansza[i][k].dostepneNumeryRzad[this.plansza[i][j].wartosc] = false;
+        }
+        for (int k = i + 1; k < this.rozmiar + 1; k++) {
+            this.plansza[k][j].dostepneNumeryKolumna[this.plansza[i][j].wartosc] = false;
+        }
+        if(!this.plansza[i][j].mniejsze.isEmpty()) {
+            int indeksMniejsze = 0;
+            for (PoleFuto F : this.plansza[i][j].mniejsze) {
+
+                if (F.numerWKolejnosci > this.plansza[i][j].numerWKolejnosci) {
+                    indeksMniejsze++;
+                    if(indeksMniejsze == 1) {
+                        for (int k = plansza[i][j].wartosc; k > 0; k--) {
+                            F.dostepneNumeryMniejsze[k] = false;
+                        }
+                    }
+                    else
+                    {
+                        for (int k = plansza[i][j].wartosc; k > 0; k--) {
+                            F.dostepneNumeryMniejsze2[k] = false;
+                        }
+                    }
+                }
+            }
+        }
+        if(!this.plansza[i][j].wieksze.isEmpty()) {
+            int indeksWieksze = 0;
+            for (PoleFuto F : this.plansza[i][j].wieksze) {
+                if (F.numerWKolejnosci > this.plansza[i][j].numerWKolejnosci) {
+                    indeksWieksze++;
+                    if(indeksWieksze == 1) {
+                        for (int k = plansza[i][j].wartosc; k < rozmiar + 1; k++) {
+                            F.dostepneNumeryWieksze[k] = false;
+                        }
+                    }
+                    else
+                    {
+                        for (int k = plansza[i][j].wartosc; k < rozmiar + 1; k++) {
+                            F.dostepneNumeryWieksze2[k] = false;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    public void przywrocDostepneCyfry(int i, int j) {
+        for (int k = j + 1; k < this.rozmiar + 1; k++) {
+            this.plansza[i][k].dostepneNumeryRzad[this.plansza[i][j].wartosc] = true;
+        }
+        for (int k = i + 1; k < this.rozmiar + 1; k++) {
+            this.plansza[k][j].dostepneNumeryKolumna[this.plansza[i][j].wartosc] = true;
+        }
+        if(!this.plansza[i][j].mniejsze.isEmpty()) {
+            int indeksMniejsze = 0;
+            for (PoleFuto F : this.plansza[i][j].mniejsze) {
+
+                if (F.numerWKolejnosci > this.plansza[i][j].numerWKolejnosci) {
+                    indeksMniejsze++;
+                    if (indeksMniejsze == 1) {
+                        for (int k = plansza[i][j].wartosc; k > 0; k--) {
+                            F.dostepneNumeryMniejsze[k] = true;
+                        }
+                    } else {
+                        for (int k = plansza[i][j].wartosc; k > 0; k--) {
+                            F.dostepneNumeryMniejsze2[k] = true;
+                        }
+                    }
+                }
+            }
+        }
+        if (!this.plansza[i][j].wieksze.isEmpty()) {
+            int indeksWieksze = 0;
+            for (PoleFuto F : this.plansza[i][j].wieksze) {
+
+                if (F.numerWKolejnosci > this.plansza[i][j].numerWKolejnosci) {
+                    indeksWieksze++;
+                    if (indeksWieksze == 1) {
+                        for (int k = plansza[i][j].wartosc; k < rozmiar + 1; k++) {
+                            F.dostepneNumeryWieksze[k] = true;
+                        }
+                    } else {
+                        for (int k = plansza[i][j].wartosc; k < rozmiar + 1; k++) {
+                            F.dostepneNumeryWieksze2[k] = true;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public boolean sprawdzCzyJakiesDostepne(int i, int j)
+    {
+        for (int k = j + 1; k < rozmiar + 1; k++) {
+            if(!this.plansza[i][k].naStale) {
+                int indeksSprawdzaniaDostepnosci = 1;
+                while (indeksSprawdzaniaDostepnosci < rozmiar + 1 && (!this.plansza[i][k].dostepneNumeryRzad[indeksSprawdzaniaDostepnosci] || !this.plansza[i][k].dostepneNumeryKolumna[indeksSprawdzaniaDostepnosci] || !this.plansza[i][k].dostepneNumeryMniejsze[indeksSprawdzaniaDostepnosci] || !this.plansza[i][k].dostepneNumeryWieksze[indeksSprawdzaniaDostepnosci] || !this.plansza[i][k].dostepneNumeryMniejsze2[indeksSprawdzaniaDostepnosci] || !this.plansza[i][k].dostepneNumeryWieksze2[indeksSprawdzaniaDostepnosci])) {
+                    indeksSprawdzaniaDostepnosci++;
+                }
+                if (indeksSprawdzaniaDostepnosci > rozmiar) {
+                    return false;
+                }
+            }
+        }
+        for (int k = i + 1; k < this.rozmiar + 1; k++) {
+            if(!this.plansza[k][j].naStale) {
+                int indeksSprawdzaniaDostepnosci = 1;
+                while (indeksSprawdzaniaDostepnosci < rozmiar + 1 && (!this.plansza[k][j].dostepneNumeryRzad[indeksSprawdzaniaDostepnosci] || !this.plansza[k][j].dostepneNumeryKolumna[indeksSprawdzaniaDostepnosci] || !this.plansza[k][j].dostepneNumeryMniejsze[indeksSprawdzaniaDostepnosci] || !this.plansza[k][j].dostepneNumeryWieksze[indeksSprawdzaniaDostepnosci] || !this.plansza[k][j].dostepneNumeryMniejsze2[indeksSprawdzaniaDostepnosci] || !this.plansza[k][j].dostepneNumeryWieksze2[indeksSprawdzaniaDostepnosci])) {
+                    indeksSprawdzaniaDostepnosci++;
+                }
+                if (indeksSprawdzaniaDostepnosci > rozmiar) {
+                    return false;
+                }
+            }
+        }
+        if(!this.plansza[i][j].mniejsze.isEmpty()) {
+            for (PoleFuto F : this.plansza[i][j].mniejsze) {
+                if (!F.naStale) {
+                    if (F.numerWKolejnosci > this.plansza[i][j].numerWKolejnosci) {
+                        int indeksSprawdzaniaDostepnosci = 1;
+                        while (indeksSprawdzaniaDostepnosci < rozmiar + 1 && (!F.dostepneNumeryRzad[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryKolumna[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryMniejsze[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryWieksze[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryMniejsze2[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryWieksze2[indeksSprawdzaniaDostepnosci])) {
+                            indeksSprawdzaniaDostepnosci++;
+                        }
+                        if (indeksSprawdzaniaDostepnosci > rozmiar) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        if(!this.plansza[i][j].wieksze.isEmpty()) {
+            for (PoleFuto F : this.plansza[i][j].wieksze) {
+                if (!F.naStale) {
+                    if (F.numerWKolejnosci > this.plansza[i][j].numerWKolejnosci) {
+                        int indeksSprawdzaniaDostepnosci = 1;
+                        while (indeksSprawdzaniaDostepnosci < rozmiar + 1 && (!F.dostepneNumeryRzad[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryKolumna[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryMniejsze[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryWieksze[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryMniejsze2[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryWieksze2[indeksSprawdzaniaDostepnosci])) {
+                            indeksSprawdzaniaDostepnosci++;
+                        }
+                        if (indeksSprawdzaniaDostepnosci > rozmiar) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    public void usuniecieWartosciZNaStale() {
+        for (int i = 1; i < rozmiar + 1; i++) {
+            for (int j = 1; j < rozmiar + 1; j++) {
+                if (this.plansza[i][j].naStale) {
+                    for (int k = 1; k < this.rozmiar + 1; k++) {
+                        this.plansza[i][k].dostepneNumeryRzad[this.plansza[i][j].wartosc] = false;
+                    }
+                    for (int k = 1; k < this.rozmiar + 1; k++) {
+                        this.plansza[k][j].dostepneNumeryKolumna[this.plansza[i][j].wartosc] = false;
+                    }
+                    if (!this.plansza[i][j].mniejsze.isEmpty()) {
+                        int indeksMniejsze = 0;
+                        for (PoleFuto F : this.plansza[i][j].mniejsze) {
+                            indeksMniejsze++;
+                            if (indeksMniejsze == 1) {
+                                for (int k = plansza[i][j].wartosc; k > 0; k--) {
+                                    F.dostepneNumeryMniejsze[k] = false;
+                                }
+                            } else {
+                                for (int k = plansza[i][j].wartosc; k > 0; k--) {
+                                    F.dostepneNumeryMniejsze2[k] = false;
+                                }
+                            }
+
+                        }
+                    }
+                    if(!this.plansza[i][j].wieksze.isEmpty()) {
+                        int indeksWieksze = 0;
+                        for (PoleFuto F : this.plansza[i][j].wieksze) {
+                                indeksWieksze++;
+                                if(indeksWieksze == 1) {
+                                    for (int k = plansza[i][j].wartosc; k < rozmiar + 1; k++) {
+                                        F.dostepneNumeryWieksze[k] = false;
+                                    }
+                                }
+                                else
+                                {
+                                    for (int k = plansza[i][j].wartosc; k < rozmiar + 1; k++) {
+                                        F.dostepneNumeryWieksze2[k] = false;
+                                    }
+                                }
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public boolean sprawdzanieWprzod()
+    {
+        this.usuniecieWartosciZNaStale();
+        int obecnyNumerPola = 1;
+        PoleFuto obecnePole = plansza[1][1];
+        int obecnieSprawdzaWartosc = 0;
+        int dostepneSprawdzenia = rozmiar;
+        while(obecnyNumerPola <= rozmiar*rozmiar) {
+
+            boolean sprawdzWartoscPola = false;
+            if (!obecnePole.naStale) {
+                while (!sprawdzWartoscPola) {
+                    while (!sprawdzWartoscPola && obecnePole.sprawdzoneCyfry < dostepneSprawdzenia) {
+                        int indeksDostepnosci = obecnieSprawdzaWartosc + 1;
+                        if(indeksDostepnosci == rozmiar + 1)
+                        {
+                            indeksDostepnosci = 1;
+                        }
+                        while(!obecnePole.dostepneNumeryRzad[indeksDostepnosci] || !obecnePole.dostepneNumeryKolumna[indeksDostepnosci] || !obecnePole.dostepneNumeryMniejsze[indeksDostepnosci] || !obecnePole.dostepneNumeryWieksze[indeksDostepnosci] || !obecnePole.dostepneNumeryMniejsze2[indeksDostepnosci] || !obecnePole.dostepneNumeryWieksze2[indeksDostepnosci])
+                        {
+                            indeksDostepnosci++;
+                            if(indeksDostepnosci == rozmiar + 1)
+                            {
+                                indeksDostepnosci = 1;
+                            }
+                        }
+                        obecnieSprawdzaWartosc = indeksDostepnosci;
+                        obecnePole.wartosc = obecnieSprawdzaWartosc;
+                        obecnePole.sprawdzoneCyfry++;
+                        int indeksI = obecnePole.nrPola / 10;
+                        int indeksJ = obecnePole.nrPola % 10;
+                        this.usunDostepneCyfry(indeksI, indeksJ);
+                        if (this.sprawdzCzyJakiesDostepne(indeksI, indeksJ)) {
+                            sprawdzWartoscPola = true;
+                        }
+                        else
+                        {
+                            indeksI = obecnePole.nrPola / 10;
+                            indeksJ = obecnePole.nrPola % 10;
+                            this.przywrocDostepneCyfry(indeksI, indeksJ);
+                        }
+                    }
+                    if (!sprawdzWartoscPola) {
+                        if(plansza[1][1].naStale)
+                        {
+                            if (obecnePole.numerWKolejnosci == 2 && obecnePole.sprawdzoneCyfry == dostepneSprawdzenia) {
+                                return false;
+                            }
+                        }
+                        if (obecnePole.numerWKolejnosci == 1 && obecnePole.sprawdzoneCyfry == rozmiar) {
+                            return false;
+                        } else {
+                            int indeksI = obecnePole.nrPola / 10;
+                            int indeksJ = obecnePole.nrPola % 10;
+                            this.przywrocDostepneCyfry(indeksI, indeksJ);
+                            obecnePole.wartosc = 0;
+                            obecnePole.sprawdzoneCyfry = 0;
+                            obecnePole = obecnePole.poprzedniePole;
+                            while(obecnePole.naStale)
+                            {
+                                obecnePole = obecnePole.poprzedniePole;
+                            }
+                            dostepneSprawdzenia = 0;
+                            for(int i = 1; i < rozmiar + 1; i++)
+                            {
+                                if(obecnePole.dostepneNumeryRzad[i] && obecnePole.dostepneNumeryKolumna[i] && obecnePole.dostepneNumeryMniejsze[i] && obecnePole.dostepneNumeryWieksze[i] && obecnePole.dostepneNumeryMniejsze2[i] && obecnePole.dostepneNumeryWieksze2[i])
+                                {
+                                    dostepneSprawdzenia++;
+                                }
+                            }
+                            indeksI = obecnePole.nrPola / 10;
+                            indeksJ = obecnePole.nrPola % 10;
+                            this.przywrocDostepneCyfry(indeksI, indeksJ);
+                            obecnyNumerPola = obecnePole.numerWKolejnosci;
+                            obecnieSprawdzaWartosc = obecnePole.wartosc;
+
+                        }
+                    }
+                }
+                obecnieSprawdzaWartosc = obecnePole.wartosc;
+            }
+
+            if(obecnePole.numerWKolejnosci != rozmiar * rozmiar) {
+                obecnePole = obecnePole.nastepnePole;
+                dostepneSprawdzenia = 0;
+                for(int i = 1; i < rozmiar + 1; i++)
+                {
+                    if(obecnePole.dostepneNumeryRzad[i] && obecnePole.dostepneNumeryKolumna[i] && obecnePole.dostepneNumeryMniejsze[i] && obecnePole.dostepneNumeryWieksze[i] && obecnePole.dostepneNumeryMniejsze2[i] && obecnePole.dostepneNumeryWieksze2[i])
+                    {
+                        dostepneSprawdzenia++;
+                    }
+                }
+            }
+
             obecnyNumerPola++;
         }
         return true;
