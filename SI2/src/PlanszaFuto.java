@@ -349,9 +349,9 @@ public class PlanszaFuto {
     public boolean sprawdzCzyJakiesDostepne(int i, int j)
     {
         for (int k = j + 1; k < rozmiar + 1; k++) {
-            if(!this.plansza[i][k].naStale) {
+            if(!plansza[i][k].naStale) {
                 int indeksSprawdzaniaDostepnosci = 1;
-                while (indeksSprawdzaniaDostepnosci < rozmiar + 1 && (!this.plansza[i][k].dostepneNumeryRzad[indeksSprawdzaniaDostepnosci] || !this.plansza[i][k].dostepneNumeryKolumna[indeksSprawdzaniaDostepnosci] || !this.plansza[i][k].dostepneNumeryMniejsze[indeksSprawdzaniaDostepnosci] || !this.plansza[i][k].dostepneNumeryWieksze[indeksSprawdzaniaDostepnosci] || !this.plansza[i][k].dostepneNumeryMniejsze2[indeksSprawdzaniaDostepnosci] || !this.plansza[i][k].dostepneNumeryWieksze2[indeksSprawdzaniaDostepnosci])) {
+                while (indeksSprawdzaniaDostepnosci < rozmiar + 1 && (!plansza[i][k].dostepneNumeryRzad[indeksSprawdzaniaDostepnosci] || !plansza[i][k].dostepneNumeryKolumna[indeksSprawdzaniaDostepnosci] || !plansza[i][k].dostepneNumeryMniejsze[indeksSprawdzaniaDostepnosci] || !plansza[i][k].dostepneNumeryWieksze[indeksSprawdzaniaDostepnosci] || !plansza[i][k].dostepneNumeryMniejsze2[indeksSprawdzaniaDostepnosci] || !plansza[i][k].dostepneNumeryWieksze2[indeksSprawdzaniaDostepnosci])) {
                     indeksSprawdzaniaDostepnosci++;
                 }
                 if (indeksSprawdzaniaDostepnosci > rozmiar) {
@@ -359,10 +359,10 @@ public class PlanszaFuto {
                 }
             }
         }
-        for (int k = i + 1; k < this.rozmiar + 1; k++) {
-            if(!this.plansza[k][j].naStale) {
+        for (int k = i + 1; k < rozmiar + 1; k++) {
+            if(!plansza[k][j].naStale) {
                 int indeksSprawdzaniaDostepnosci = 1;
-                while (indeksSprawdzaniaDostepnosci < rozmiar + 1 && (!this.plansza[k][j].dostepneNumeryRzad[indeksSprawdzaniaDostepnosci] || !this.plansza[k][j].dostepneNumeryKolumna[indeksSprawdzaniaDostepnosci] || !this.plansza[k][j].dostepneNumeryMniejsze[indeksSprawdzaniaDostepnosci] || !this.plansza[k][j].dostepneNumeryWieksze[indeksSprawdzaniaDostepnosci] || !this.plansza[k][j].dostepneNumeryMniejsze2[indeksSprawdzaniaDostepnosci] || !this.plansza[k][j].dostepneNumeryWieksze2[indeksSprawdzaniaDostepnosci])) {
+                while (indeksSprawdzaniaDostepnosci < rozmiar + 1 && (!plansza[k][j].dostepneNumeryRzad[indeksSprawdzaniaDostepnosci] || !plansza[k][j].dostepneNumeryKolumna[indeksSprawdzaniaDostepnosci] || !plansza[k][j].dostepneNumeryMniejsze[indeksSprawdzaniaDostepnosci] || !plansza[k][j].dostepneNumeryWieksze[indeksSprawdzaniaDostepnosci] || !plansza[k][j].dostepneNumeryMniejsze2[indeksSprawdzaniaDostepnosci] || !plansza[k][j].dostepneNumeryWieksze2[indeksSprawdzaniaDostepnosci])) {
                     indeksSprawdzaniaDostepnosci++;
                 }
                 if (indeksSprawdzaniaDostepnosci > rozmiar) {
@@ -370,10 +370,10 @@ public class PlanszaFuto {
                 }
             }
         }
-        if(!this.plansza[i][j].mniejsze.isEmpty()) {
-            for (PoleFuto F : this.plansza[i][j].mniejsze) {
+        if(!plansza[i][j].mniejsze.isEmpty()) {
+            for (PoleFuto F : plansza[i][j].mniejsze) {
                 if (!F.naStale) {
-                    if (F.numerWKolejnosci > this.plansza[i][j].numerWKolejnosci) {
+                    if (F.numerWKolejnosci > plansza[i][j].numerWKolejnosci) {
                         int indeksSprawdzaniaDostepnosci = 1;
                         while (indeksSprawdzaniaDostepnosci < rozmiar + 1 && (!F.dostepneNumeryRzad[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryKolumna[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryMniejsze[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryWieksze[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryMniejsze2[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryWieksze2[indeksSprawdzaniaDostepnosci])) {
                             indeksSprawdzaniaDostepnosci++;
@@ -385,10 +385,10 @@ public class PlanszaFuto {
                 }
             }
         }
-        if(!this.plansza[i][j].wieksze.isEmpty()) {
-            for (PoleFuto F : this.plansza[i][j].wieksze) {
+        if(!plansza[i][j].wieksze.isEmpty()) {
+            for (PoleFuto F : plansza[i][j].wieksze) {
                 if (!F.naStale) {
-                    if (F.numerWKolejnosci > this.plansza[i][j].numerWKolejnosci) {
+                    if (F.numerWKolejnosci > plansza[i][j].numerWKolejnosci) {
                         int indeksSprawdzaniaDostepnosci = 1;
                         while (indeksSprawdzaniaDostepnosci < rozmiar + 1 && (!F.dostepneNumeryRzad[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryKolumna[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryMniejsze[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryWieksze[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryMniejsze2[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryWieksze2[indeksSprawdzaniaDostepnosci])) {
                             indeksSprawdzaniaDostepnosci++;

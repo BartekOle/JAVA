@@ -10,7 +10,7 @@ public class PlanszaSky {
     int LewaPrawa[][];
 
     public void wczytanieDanychSky() throws IOException {
-        String fileName = "C:\\Users\\dios1\\IdeaProjects\\SI2\\src\\test_sky_6_4.txt";
+        String fileName = "C:\\Users\\dios1\\IdeaProjects\\SI2\\src\\test_sky_6_3.txt";
         File file = new File(fileName);
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
@@ -280,6 +280,199 @@ public class PlanszaSky {
                 }
 
             obecnePole = obecnePole.nastepnePole;
+            obecnyNumerPola++;
+        }
+        return true;
+    }
+
+    public void usunDostepneCyfry(int i, int j) {
+        for (int k = j + 1; k < rozmiar + 1; k++) {
+            plansza[i][k].dostepneNumeryRzad[plansza[i][j].wartosc] = false;
+        }
+        for (int k = i + 1; k < rozmiar + 1; k++) {
+            plansza[k][j].dostepneNumeryKolumna[plansza[i][j].wartosc] = false;
+        }
+        if (GoraDol[0][j] != 0) {
+            int najwiekszaWatosc = plansza[1][j].wartosc;
+            int ileWidac = 1;
+            for (int k = 2; k <= i; k++) {
+                if (najwiekszaWatosc < plansza[k][j].wartosc) {
+                    ileWidac++;
+                    najwiekszaWatosc = plansza[k][j].wartosc;
+                }
+            }
+            if (ileWidac == GoraDol[0][j]) {
+                for (int k = i + 1; k < rozmiar + 1; k++) {
+                    for (int m = najwiekszaWatosc; m < rozmiar + 1; m++)
+                        plansza[k][j].dostepneNumeryGora[m] = false;
+                }
+            }
+        }
+        if (LewaPrawa[i][0] != 0) {
+            int najwiekszaWartosc = plansza[i][1].wartosc;
+            int ileWidac = 1;
+            for (int k = 2; k <= j; k++) {
+                if (najwiekszaWartosc < plansza[i][k].wartosc) {
+                    ileWidac++;
+                    najwiekszaWartosc = plansza[i][k].wartosc;
+                }
+            }
+            if (ileWidac == LewaPrawa[i][0]) {
+                for (int k = j + 1; k < rozmiar + 1; k++) {
+                    for (int m = najwiekszaWartosc; m < rozmiar + 1; m++)
+                        plansza[i][k].dostepneNumeryLewo[m] = false;
+                }
+
+            }
+        }
+    }
+
+    public void przywrocDostepneCyfry(int i, int j) {
+        for (int k = j + 1; k < rozmiar + 1; k++) {
+            plansza[i][k].dostepneNumeryRzad[plansza[i][j].wartosc] = true;
+        }
+        for (int k = i + 1; k < rozmiar + 1; k++) {
+            plansza[k][j].dostepneNumeryKolumna[plansza[i][j].wartosc] = true;
+        }
+        if (GoraDol[0][j] != 0) {
+            int najwiekszaWatosc = plansza[1][j].wartosc;
+            int ileWidac = 1;
+            for (int k = 2; k <= i; k++) {
+                if (najwiekszaWatosc < plansza[k][j].wartosc) {
+                    ileWidac++;
+                    najwiekszaWatosc = plansza[k][j].wartosc;
+                }
+            }
+            if (ileWidac == GoraDol[0][j]) {
+                for (int k = i + 1; k < rozmiar + 1; k++) {
+                    for (int m = najwiekszaWatosc; m < rozmiar + 1; m++)
+                        plansza[k][j].dostepneNumeryGora[m] = true;
+                }
+            }
+        }
+        if (LewaPrawa[i][0] != 0) {
+            int najwiekszaWartosc = plansza[i][1].wartosc;
+            int ileWidac = 1;
+            for (int k = 2; k <= j; k++) {
+                if (najwiekszaWartosc < plansza[i][k].wartosc) {
+                    ileWidac++;
+                    najwiekszaWartosc = plansza[i][k].wartosc;
+                }
+            }
+            if (ileWidac == LewaPrawa[i][0]) {
+                for (int k = j + 1; k < rozmiar + 1; k++) {
+                    for (int m = najwiekszaWartosc; m < rozmiar + 1; m++)
+                        plansza[i][k].dostepneNumeryLewo[m] = true;
+                }
+
+            }
+        }
+    }
+
+    public boolean sprawdzCzyJakiesDostepne(int i, int j)
+    {
+        for (int k = j + 1; k < rozmiar + 1; k++) {
+                int indeksSprawdzaniaDostepnosci = 1;
+                while (indeksSprawdzaniaDostepnosci < rozmiar + 1 && (!plansza[i][k].dostepneNumeryRzad[indeksSprawdzaniaDostepnosci] || !plansza[i][k].dostepneNumeryKolumna[indeksSprawdzaniaDostepnosci] || !plansza[i][k].dostepneNumeryGora[indeksSprawdzaniaDostepnosci] || !plansza[i][k].dostepneNumeryLewo[indeksSprawdzaniaDostepnosci])) {
+                    indeksSprawdzaniaDostepnosci++;
+                }
+                if (indeksSprawdzaniaDostepnosci > rozmiar) {
+                    return false;
+                }
+            }
+        
+        for (int k = i + 1; k < rozmiar + 1; k++) {
+                int indeksSprawdzaniaDostepnosci = 1;
+                while (indeksSprawdzaniaDostepnosci < rozmiar + 1 && (!plansza[k][j].dostepneNumeryRzad[indeksSprawdzaniaDostepnosci] || !plansza[k][j].dostepneNumeryKolumna[indeksSprawdzaniaDostepnosci] || !plansza[k][j].dostepneNumeryGora[indeksSprawdzaniaDostepnosci] || !plansza[k][j].dostepneNumeryLewo[indeksSprawdzaniaDostepnosci])) {
+                    indeksSprawdzaniaDostepnosci++;
+                }
+                if (indeksSprawdzaniaDostepnosci > rozmiar) {
+                    return false;
+                }
+            }
+        return true;
+    }
+
+    public boolean sprawdzanieWprzod()
+    {
+        int obecnyNumerPola = 1;
+        PoleSky obecnePole = plansza[1][1];
+        int obecnieSprawdzaWartosc = 0;
+        int dostepneSprawdzenia = rozmiar;
+        while(obecnyNumerPola <= rozmiar*rozmiar) {
+            boolean sprawdzWartoscPola = false;
+                while (!sprawdzWartoscPola) {
+                    while (!sprawdzWartoscPola && obecnePole.sprawdzoneCyfry < dostepneSprawdzenia) {
+                        int indeksDostepnosci = obecnieSprawdzaWartosc + 1;
+                        if(indeksDostepnosci == rozmiar + 1)
+                        {
+                            indeksDostepnosci = 1;
+                        }
+                        while(!obecnePole.dostepneNumeryRzad[indeksDostepnosci] || !obecnePole.dostepneNumeryKolumna[indeksDostepnosci] || !obecnePole.dostepneNumeryGora[indeksDostepnosci] || !obecnePole.dostepneNumeryLewo[indeksDostepnosci])
+                        {
+                            indeksDostepnosci++;
+                            if(indeksDostepnosci == rozmiar + 1)
+                            {
+                                indeksDostepnosci = 1;
+                            }
+                        }
+                        obecnieSprawdzaWartosc = indeksDostepnosci;
+                        obecnePole.wartosc = obecnieSprawdzaWartosc;
+                        obecnePole.sprawdzoneCyfry++;
+                        int indeksI = obecnePole.nrPola / 10;
+                        int indeksJ = obecnePole.nrPola % 10;
+                        usunDostepneCyfry(indeksI, indeksJ);
+                        if (sprawdzCzyJakiesDostepne(indeksI, indeksJ) && sprawdzPrawa(indeksI, indeksJ) && sprawdzDol(indeksI, indeksJ)) {
+                            sprawdzWartoscPola = true;
+                        }
+                        else
+                        {
+                            indeksI = obecnePole.nrPola / 10;
+                            indeksJ = obecnePole.nrPola % 10;
+                            przywrocDostepneCyfry(indeksI, indeksJ);
+                        }
+                    }
+                    if (!sprawdzWartoscPola) {
+                        if (obecnePole.numerWKolejnosci == 1 && obecnePole.sprawdzoneCyfry == rozmiar) {
+                            return false;
+                        } else {
+                            int indeksI = obecnePole.nrPola / 10;
+                            int indeksJ = obecnePole.nrPola % 10;
+                            przywrocDostepneCyfry(indeksI, indeksJ);
+                            obecnePole.wartosc = 0;
+                            obecnePole.sprawdzoneCyfry = 0;
+                            obecnePole = obecnePole.poprzedniePole;
+                            dostepneSprawdzenia = 0;
+                            for(int i = 1; i < rozmiar + 1; i++)
+                            {
+                                if(obecnePole.dostepneNumeryRzad[i] && obecnePole.dostepneNumeryKolumna[i] && obecnePole.dostepneNumeryGora[i] && obecnePole.dostepneNumeryLewo[i])
+                                {
+                                    dostepneSprawdzenia++;
+                                }
+                            }
+                            indeksI = obecnePole.nrPola / 10;
+                            indeksJ = obecnePole.nrPola % 10;
+                            przywrocDostepneCyfry(indeksI, indeksJ);
+                            obecnyNumerPola = obecnePole.numerWKolejnosci;
+                            obecnieSprawdzaWartosc = obecnePole.wartosc;
+
+                        }
+                    }
+                }
+                obecnieSprawdzaWartosc = obecnePole.wartosc;
+
+            if(obecnePole.numerWKolejnosci != rozmiar * rozmiar) {
+                obecnePole = obecnePole.nastepnePole;
+                dostepneSprawdzenia = 0;
+                for(int i = 1; i < rozmiar + 1; i++)
+                {
+                    if(obecnePole.dostepneNumeryRzad[i] && obecnePole.dostepneNumeryKolumna[i] && obecnePole.dostepneNumeryGora[i] && obecnePole.dostepneNumeryLewo[i])
+                    {
+                        dostepneSprawdzenia++;
+                    }
+                }
+            }
+
             obecnyNumerPola++;
         }
         return true;
