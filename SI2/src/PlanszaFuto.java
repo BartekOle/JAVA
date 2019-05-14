@@ -62,23 +62,25 @@ public class PlanszaFuto {
 
             for(int j =1; j < rozmiar+1; j++)
             {
-                if(i != rozmiar && j != rozmiar )
+                if(i != rozmiar || j != rozmiar )
                 {
                     if(j == rozmiar)
                     {
-                        this.plansza[i][j].nastepnePole = this.plansza[i+1][0];
+                        this.plansza[i][j].nastepnePole = this.plansza[i+1][1];
                     }
                     else {
                         this.plansza[i][j].nastepnePole = this.plansza[i][j + 1];
                     }
                 }
-                if(i != 1 && j != 1)
+                if(i != 1 || j != 1)
                 {
                     if(j == 1)
                     {
                         this.plansza[i][j].poprzedniePole = this.plansza[i-1][rozmiar];
                     }
-                    this.plansza[i][j].poprzedniePole = this.plansza[i][j-1];
+                    else {
+                        this.plansza[i][j].poprzedniePole = this.plansza[i][j - 1];
+                    }
                 }
             }
         }
@@ -101,19 +103,48 @@ public class PlanszaFuto {
 
     public boolean sprawdzWieksze(int i, int j)
     {
-            for(PoleFuto F: this.plansza[i][j].wieksze) {
+        if(this.plansza[i][j].wieksze.isEmpty())
+        {
+            return true;
+        }
+        else
+        {
+            if(this.plansza[i][j].wartosc == 1)
+            {
+                return false;
+            }
+            else {
+                for (PoleFuto F : this.plansza[i][j].wieksze) {
                 if (this.plansza[i][j].wartosc <= F.wartosc) {
-                    return false;
+                        return false;
+                    }
                 }
             }
-        return true;
+        }
+
+    return true;
     }
 
     public boolean sprawdzMniejsze(int i, int j)
     {
-        for(PoleFuto F: this.plansza[i][j].mniejsze) {
-            if (this.plansza[i][j].wartosc >= F.wartosc) {
+        if(this.plansza[i][j].mniejsze.isEmpty())
+        {
+            return true;
+        }
+        else {
+            if(this.plansza[i][j].wartosc == rozmiar)
+            {
                 return false;
+            }
+            else {
+                for (PoleFuto F : this.plansza[i][j].mniejsze) {
+                    if(F.wartosc != 0)
+                    {
+                        if (this.plansza[i][j].wartosc >= F.wartosc) {
+                            return false;
+                        }
+                    }
+                }
             }
         }
         return true;
@@ -153,6 +184,70 @@ public class PlanszaFuto {
             {
                 return false;
             }
+        }
+        return true;
+    }
+
+    public boolean przeszukiwaniePrzyrostoweZPowrotem()
+    {
+        int obecnyNumerPola = 1;
+        PoleFuto obecnePole = plansza[1][1];
+        int obecnieSprawdzaWartosc = 1;
+        boolean sprawdzObecnePole = false;
+        while(obecnyNumerPola <= rozmiar*rozmiar) {
+
+            boolean sprawdzWartoscPola = false;
+            if (!obecnePole.naStale) {
+                while (!sprawdzWartoscPola) {
+                    while (!sprawdzWartoscPola && obecnePole.sprawdzoneCyfry < rozmiar) {
+                        obecnePole.wartosc = obecnieSprawdzaWartosc;
+                        obecnePole.sprawdzoneCyfry++;
+                        int indeksI = obecnePole.nrPola / 10;
+                        int indeksJ = obecnePole.nrPola % 10;
+                        if (this.sprawdzKolumne(indeksI, indeksJ) && this.sprawdzRzad(indeksI, indeksJ) && this.sprawdzMniejsze(indeksI, indeksJ) && this.sprawdzWieksze(indeksI, indeksJ)) {
+                            sprawdzWartoscPola = true;
+                        } else {
+                            if (obecnieSprawdzaWartosc == rozmiar) {
+                                obecnieSprawdzaWartosc = 1;
+                            } else {
+                                obecnieSprawdzaWartosc++;
+                            }
+                        }
+                    }
+                    if (!sprawdzWartoscPola) {
+                        if(plansza[1][1].naStale)
+                        {
+                            if (obecnePole.numerWKolejnosci == 2 && obecnePole.sprawdzoneCyfry == rozmiar) {
+                                return false;
+                            }
+                        }
+                        if (obecnePole.numerWKolejnosci == 1 && obecnePole.sprawdzoneCyfry == rozmiar) {
+                            return false;
+                        } else {
+                            obecnePole.wartosc = 0;
+                            obecnePole.sprawdzoneCyfry = 0;
+                            obecnePole = obecnePole.poprzedniePole;
+                            while(obecnePole.naStale)
+                                {
+                                    obecnePole = obecnePole.poprzedniePole;
+                                }
+                            obecnyNumerPola = obecnePole.numerWKolejnosci;
+                            if (obecnePole.wartosc == rozmiar) {
+                                obecnieSprawdzaWartosc = 1;
+                            } else {
+                                obecnieSprawdzaWartosc = obecnePole.wartosc + 1;
+                            }
+                        }
+                    }
+                }
+                if (obecnePole.wartosc == rozmiar) {
+                    obecnieSprawdzaWartosc = 1;
+                } else {
+                    obecnieSprawdzaWartosc = obecnePole.wartosc + 1;
+                }
+            }
+            obecnePole = obecnePole.nastepnePole;
+            obecnyNumerPola++;
         }
         return true;
     }
