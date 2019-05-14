@@ -1,16 +1,18 @@
 public class PoleSky {
-    int wartosc;
-    int nrPola;
-    int numerWKolejnosci;
-    int sprawdzoneCyfry;
-    PoleSky nastepnePole;
-    PoleSky poprzedniePole;
-    boolean dostepneNumeryRzad[];
-    boolean dostepneNumeryKolumna[];
-    boolean dostepneNumeryGora[];
-    boolean dostepneNumeryLewo[];
+    protected int wartosc;
+    protected int nrPola;
+    protected int numerWKolejnosci;
+    protected int sprawdzoneCyfry;
+    protected PoleSky nastepnePole;
+    protected PoleSky poprzedniePole;
+    protected boolean dostepneNumeryRzad[];
+    protected boolean dostepneNumeryKolumna[];
+    protected boolean dostepneNumeryGora[];
+    protected boolean dostepneNumeryLewo[];
+    protected boolean uzyto;
     public PoleSky(int nrPola, int numerWKolejnosci, int rozmiar)
     {
+        uzyto = false;
         this.wartosc = 0;
         this.nrPola = nrPola;
         this.sprawdzoneCyfry = 0;

@@ -4,8 +4,10 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class PlanszaFuto {
-    int rozmiar;
-    PoleFuto plansza[][];
+    protected int rozmiar;
+    protected PoleFuto plansza[][];
+    protected int liczbaIteracji;
+    protected int wykorzystanePola;
 
     public int zamiana(char znak) {
         int liczba = 0;
@@ -34,7 +36,8 @@ public class PlanszaFuto {
 
     public  void wczytanieDanychFuto() throws IOException
     {
-        String fileName = "C:\\Users\\dios1\\IdeaProjects\\SI2\\src\\test_futo_4_1.txt";
+        liczbaIteracji = 0;
+        String fileName = "C:\\Users\\dios1\\IdeaProjects\\SI2\\src\\test_futo_6_2.txt";
         File file = new File(fileName);
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
@@ -202,6 +205,7 @@ public class PlanszaFuto {
             if (!obecnePole.naStale) {
                 while (!sprawdzWartoscPola) {
                     while (!sprawdzWartoscPola && obecnePole.sprawdzoneCyfry < rozmiar) {
+                        liczbaIteracji++;
                         obecnePole.wartosc = obecnieSprawdzaWartosc;
                         obecnePole.sprawdzoneCyfry++;
                         int indeksI = obecnePole.nrPola / 10;
@@ -262,41 +266,21 @@ public class PlanszaFuto {
             this.plansza[k][j].dostepneNumeryKolumna[this.plansza[i][j].wartosc] = false;
         }
         if(!this.plansza[i][j].mniejsze.isEmpty()) {
-            int indeksMniejsze = 0;
             for (PoleFuto F : this.plansza[i][j].mniejsze) {
 
                 if (F.numerWKolejnosci > this.plansza[i][j].numerWKolejnosci) {
-                    indeksMniejsze++;
-                    if(indeksMniejsze == 1) {
                         for (int k = plansza[i][j].wartosc; k > 0; k--) {
                             F.dostepneNumeryMniejsze[k] = false;
                         }
                     }
-                    else
-                    {
-                        for (int k = plansza[i][j].wartosc; k > 0; k--) {
-                            F.dostepneNumeryMniejsze2[k] = false;
-                        }
-                    }
-                }
             }
         }
         if(!this.plansza[i][j].wieksze.isEmpty()) {
-            int indeksWieksze = 0;
             for (PoleFuto F : this.plansza[i][j].wieksze) {
                 if (F.numerWKolejnosci > this.plansza[i][j].numerWKolejnosci) {
-                    indeksWieksze++;
-                    if(indeksWieksze == 1) {
                         for (int k = plansza[i][j].wartosc; k < rozmiar + 1; k++) {
                             F.dostepneNumeryWieksze[k] = false;
                         }
-                    }
-                    else
-                    {
-                        for (int k = plansza[i][j].wartosc; k < rozmiar + 1; k++) {
-                            F.dostepneNumeryWieksze2[k] = false;
-                        }
-                    }
                 }
             }
         }
@@ -309,38 +293,22 @@ public class PlanszaFuto {
             this.plansza[k][j].dostepneNumeryKolumna[this.plansza[i][j].wartosc] = true;
         }
         if(!this.plansza[i][j].mniejsze.isEmpty()) {
-            int indeksMniejsze = 0;
             for (PoleFuto F : this.plansza[i][j].mniejsze) {
 
                 if (F.numerWKolejnosci > this.plansza[i][j].numerWKolejnosci) {
-                    indeksMniejsze++;
-                    if (indeksMniejsze == 1) {
                         for (int k = plansza[i][j].wartosc; k > 0; k--) {
                             F.dostepneNumeryMniejsze[k] = true;
                         }
-                    } else {
-                        for (int k = plansza[i][j].wartosc; k > 0; k--) {
-                            F.dostepneNumeryMniejsze2[k] = true;
-                        }
-                    }
                 }
             }
         }
         if (!this.plansza[i][j].wieksze.isEmpty()) {
-            int indeksWieksze = 0;
             for (PoleFuto F : this.plansza[i][j].wieksze) {
 
                 if (F.numerWKolejnosci > this.plansza[i][j].numerWKolejnosci) {
-                    indeksWieksze++;
-                    if (indeksWieksze == 1) {
                         for (int k = plansza[i][j].wartosc; k < rozmiar + 1; k++) {
                             F.dostepneNumeryWieksze[k] = true;
                         }
-                    } else {
-                        for (int k = plansza[i][j].wartosc; k < rozmiar + 1; k++) {
-                            F.dostepneNumeryWieksze2[k] = true;
-                        }
-                    }
                 }
             }
         }
@@ -351,7 +319,7 @@ public class PlanszaFuto {
         for (int k = j + 1; k < rozmiar + 1; k++) {
             if(!plansza[i][k].naStale) {
                 int indeksSprawdzaniaDostepnosci = 1;
-                while (indeksSprawdzaniaDostepnosci < rozmiar + 1 && (!plansza[i][k].dostepneNumeryRzad[indeksSprawdzaniaDostepnosci] || !plansza[i][k].dostepneNumeryKolumna[indeksSprawdzaniaDostepnosci] || !plansza[i][k].dostepneNumeryMniejsze[indeksSprawdzaniaDostepnosci] || !plansza[i][k].dostepneNumeryWieksze[indeksSprawdzaniaDostepnosci] || !plansza[i][k].dostepneNumeryMniejsze2[indeksSprawdzaniaDostepnosci] || !plansza[i][k].dostepneNumeryWieksze2[indeksSprawdzaniaDostepnosci])) {
+                while (indeksSprawdzaniaDostepnosci < rozmiar + 1 && (!plansza[i][k].dostepneNumeryRzad[indeksSprawdzaniaDostepnosci] || !plansza[i][k].dostepneNumeryKolumna[indeksSprawdzaniaDostepnosci] || !plansza[i][k].dostepneNumeryMniejsze[indeksSprawdzaniaDostepnosci] || !plansza[i][k].dostepneNumeryWieksze[indeksSprawdzaniaDostepnosci] )) {
                     indeksSprawdzaniaDostepnosci++;
                 }
                 if (indeksSprawdzaniaDostepnosci > rozmiar) {
@@ -362,7 +330,7 @@ public class PlanszaFuto {
         for (int k = i + 1; k < rozmiar + 1; k++) {
             if(!plansza[k][j].naStale) {
                 int indeksSprawdzaniaDostepnosci = 1;
-                while (indeksSprawdzaniaDostepnosci < rozmiar + 1 && (!plansza[k][j].dostepneNumeryRzad[indeksSprawdzaniaDostepnosci] || !plansza[k][j].dostepneNumeryKolumna[indeksSprawdzaniaDostepnosci] || !plansza[k][j].dostepneNumeryMniejsze[indeksSprawdzaniaDostepnosci] || !plansza[k][j].dostepneNumeryWieksze[indeksSprawdzaniaDostepnosci] || !plansza[k][j].dostepneNumeryMniejsze2[indeksSprawdzaniaDostepnosci] || !plansza[k][j].dostepneNumeryWieksze2[indeksSprawdzaniaDostepnosci])) {
+                while (indeksSprawdzaniaDostepnosci < rozmiar + 1 && (!plansza[k][j].dostepneNumeryRzad[indeksSprawdzaniaDostepnosci] || !plansza[k][j].dostepneNumeryKolumna[indeksSprawdzaniaDostepnosci] || !plansza[k][j].dostepneNumeryMniejsze[indeksSprawdzaniaDostepnosci] || !plansza[k][j].dostepneNumeryWieksze[indeksSprawdzaniaDostepnosci] )) {
                     indeksSprawdzaniaDostepnosci++;
                 }
                 if (indeksSprawdzaniaDostepnosci > rozmiar) {
@@ -375,7 +343,7 @@ public class PlanszaFuto {
                 if (!F.naStale) {
                     if (F.numerWKolejnosci > plansza[i][j].numerWKolejnosci) {
                         int indeksSprawdzaniaDostepnosci = 1;
-                        while (indeksSprawdzaniaDostepnosci < rozmiar + 1 && (!F.dostepneNumeryRzad[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryKolumna[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryMniejsze[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryWieksze[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryMniejsze2[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryWieksze2[indeksSprawdzaniaDostepnosci])) {
+                        while (indeksSprawdzaniaDostepnosci < rozmiar + 1 && (!F.dostepneNumeryRzad[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryKolumna[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryMniejsze[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryWieksze[indeksSprawdzaniaDostepnosci])) {
                             indeksSprawdzaniaDostepnosci++;
                         }
                         if (indeksSprawdzaniaDostepnosci > rozmiar) {
@@ -390,7 +358,7 @@ public class PlanszaFuto {
                 if (!F.naStale) {
                     if (F.numerWKolejnosci > plansza[i][j].numerWKolejnosci) {
                         int indeksSprawdzaniaDostepnosci = 1;
-                        while (indeksSprawdzaniaDostepnosci < rozmiar + 1 && (!F.dostepneNumeryRzad[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryKolumna[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryMniejsze[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryWieksze[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryMniejsze2[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryWieksze2[indeksSprawdzaniaDostepnosci])) {
+                        while (indeksSprawdzaniaDostepnosci < rozmiar + 1 && (!F.dostepneNumeryRzad[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryKolumna[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryMniejsze[indeksSprawdzaniaDostepnosci] || !F.dostepneNumeryWieksze[indeksSprawdzaniaDostepnosci])) {
                             indeksSprawdzaniaDostepnosci++;
                         }
                         if (indeksSprawdzaniaDostepnosci > rozmiar) {
@@ -407,6 +375,7 @@ public class PlanszaFuto {
         for (int i = 1; i < rozmiar + 1; i++) {
             for (int j = 1; j < rozmiar + 1; j++) {
                 if (this.plansza[i][j].naStale) {
+                    wykorzystanePola++;
                     for (int k = 1; k < this.rozmiar + 1; k++) {
                         this.plansza[i][k].dostepneNumeryRzad[this.plansza[i][j].wartosc] = false;
                     }
@@ -414,34 +383,17 @@ public class PlanszaFuto {
                         this.plansza[k][j].dostepneNumeryKolumna[this.plansza[i][j].wartosc] = false;
                     }
                     if (!this.plansza[i][j].mniejsze.isEmpty()) {
-                        int indeksMniejsze = 0;
                         for (PoleFuto F : this.plansza[i][j].mniejsze) {
-                            indeksMniejsze++;
-                            if (indeksMniejsze == 1) {
                                 for (int k = plansza[i][j].wartosc; k > 0; k--) {
                                     F.dostepneNumeryMniejsze[k] = false;
                                 }
-                            } else {
-                                for (int k = plansza[i][j].wartosc; k > 0; k--) {
-                                    F.dostepneNumeryMniejsze2[k] = false;
-                                }
-                            }
 
                         }
                     }
                     if(!this.plansza[i][j].wieksze.isEmpty()) {
-                        int indeksWieksze = 0;
                         for (PoleFuto F : this.plansza[i][j].wieksze) {
-                                indeksWieksze++;
-                                if(indeksWieksze == 1) {
                                     for (int k = plansza[i][j].wartosc; k < rozmiar + 1; k++) {
                                         F.dostepneNumeryWieksze[k] = false;
-                                    }
-                                }
-                                else
-                                {
-                                    for (int k = plansza[i][j].wartosc; k < rozmiar + 1; k++) {
-                                        F.dostepneNumeryWieksze2[k] = false;
                                     }
                                 }
 
@@ -450,7 +402,7 @@ public class PlanszaFuto {
                 }
             }
         }
-    }
+
 
     public boolean sprawdzanieWprzod()
     {
@@ -465,12 +417,13 @@ public class PlanszaFuto {
             if (!obecnePole.naStale) {
                 while (!sprawdzWartoscPola) {
                     while (!sprawdzWartoscPola && obecnePole.sprawdzoneCyfry < dostepneSprawdzenia) {
+                        liczbaIteracji++;
                         int indeksDostepnosci = obecnieSprawdzaWartosc + 1;
                         if(indeksDostepnosci == rozmiar + 1)
                         {
                             indeksDostepnosci = 1;
                         }
-                        while(!obecnePole.dostepneNumeryRzad[indeksDostepnosci] || !obecnePole.dostepneNumeryKolumna[indeksDostepnosci] || !obecnePole.dostepneNumeryMniejsze[indeksDostepnosci] || !obecnePole.dostepneNumeryWieksze[indeksDostepnosci] || !obecnePole.dostepneNumeryMniejsze2[indeksDostepnosci] || !obecnePole.dostepneNumeryWieksze2[indeksDostepnosci])
+                        while(!obecnePole.dostepneNumeryRzad[indeksDostepnosci] || !obecnePole.dostepneNumeryKolumna[indeksDostepnosci] || !obecnePole.dostepneNumeryMniejsze[indeksDostepnosci] || !obecnePole.dostepneNumeryWieksze[indeksDostepnosci])
                         {
                             indeksDostepnosci++;
                             if(indeksDostepnosci == rozmiar + 1)
@@ -517,7 +470,7 @@ public class PlanszaFuto {
                             dostepneSprawdzenia = 0;
                             for(int i = 1; i < rozmiar + 1; i++)
                             {
-                                if(obecnePole.dostepneNumeryRzad[i] && obecnePole.dostepneNumeryKolumna[i] && obecnePole.dostepneNumeryMniejsze[i] && obecnePole.dostepneNumeryWieksze[i] && obecnePole.dostepneNumeryMniejsze2[i] && obecnePole.dostepneNumeryWieksze2[i])
+                                if(obecnePole.dostepneNumeryRzad[i] && obecnePole.dostepneNumeryKolumna[i] && obecnePole.dostepneNumeryMniejsze[i] && obecnePole.dostepneNumeryWieksze[i])
                                 {
                                     dostepneSprawdzenia++;
                                 }
@@ -539,7 +492,7 @@ public class PlanszaFuto {
                 dostepneSprawdzenia = 0;
                 for(int i = 1; i < rozmiar + 1; i++)
                 {
-                    if(obecnePole.dostepneNumeryRzad[i] && obecnePole.dostepneNumeryKolumna[i] && obecnePole.dostepneNumeryMniejsze[i] && obecnePole.dostepneNumeryWieksze[i] && obecnePole.dostepneNumeryMniejsze2[i] && obecnePole.dostepneNumeryWieksze2[i])
+                    if(obecnePole.dostepneNumeryRzad[i] && obecnePole.dostepneNumeryKolumna[i] && obecnePole.dostepneNumeryMniejsze[i] && obecnePole.dostepneNumeryWieksze[i])
                     {
                         dostepneSprawdzenia++;
                     }
@@ -547,6 +500,118 @@ public class PlanszaFuto {
             }
 
             obecnyNumerPola++;
+        }
+        return true;
+    }
+
+    public boolean sprawdzanieWprzodNajbardziejOgraniczona()
+    {
+        this.usuniecieWartosciZNaStale();
+        PoleFuto obecnePole = plansza[1][1];
+        int obecnieSprawdzaWartosc = 0;
+        int dostepneSprawdzenia = rozmiar;
+        while(wykorzystanePola <= rozmiar*rozmiar) {
+
+            boolean sprawdzWartoscPola = false;
+                while (!sprawdzWartoscPola) {
+                    while (!sprawdzWartoscPola && obecnePole.sprawdzoneCyfry < dostepneSprawdzenia) {
+                        liczbaIteracji++;
+                        int indeksDostepnosci = obecnieSprawdzaWartosc + 1;
+                        if(indeksDostepnosci == rozmiar + 1)
+                        {
+                            indeksDostepnosci = 1;
+                        }
+                        while(!obecnePole.dostepneNumeryRzad[indeksDostepnosci] || !obecnePole.dostepneNumeryKolumna[indeksDostepnosci] || !obecnePole.dostepneNumeryMniejsze[indeksDostepnosci] || !obecnePole.dostepneNumeryWieksze[indeksDostepnosci])
+                        {
+                            indeksDostepnosci++;
+                            if(indeksDostepnosci == rozmiar + 1)
+                            {
+                                indeksDostepnosci = 1;
+                            }
+                        }
+                        obecnieSprawdzaWartosc = indeksDostepnosci;
+                        obecnePole.wartosc = obecnieSprawdzaWartosc;
+                        obecnePole.sprawdzoneCyfry++;
+                        int indeksI = obecnePole.nrPola / 10;
+                        int indeksJ = obecnePole.nrPola % 10;
+                        this.usunDostepneCyfry(indeksI, indeksJ);
+                        if (this.sprawdzCzyJakiesDostepne(indeksI, indeksJ)) {
+                            sprawdzWartoscPola = true;
+                        }
+                        else
+                        {
+                            indeksI = obecnePole.nrPola / 10;
+                            indeksJ = obecnePole.nrPola % 10;
+                            this.przywrocDostepneCyfry(indeksI, indeksJ);
+                        }
+                    }
+                    if (!sprawdzWartoscPola) {
+                        if(plansza[1][1].naStale)
+                        {
+                            if (obecnePole.numerWKolejnosci == 2 && obecnePole.sprawdzoneCyfry == dostepneSprawdzenia) {
+                                return false;
+                            }
+                        }
+                        if (obecnePole.numerWKolejnosci == 1 && obecnePole.sprawdzoneCyfry == rozmiar) {
+                            return false;
+                        } else {
+                            int indeksI = obecnePole.nrPola / 10;
+                            int indeksJ = obecnePole.nrPola % 10;
+                            this.przywrocDostepneCyfry(indeksI, indeksJ);
+                            obecnePole.wartosc = 0;
+                            obecnePole.sprawdzoneCyfry = 0;
+                            obecnePole.uzyto = false;
+                            obecnePole = obecnePole.poprzedniePole;
+                            dostepneSprawdzenia = 0;
+                            for(int i = 1; i < rozmiar + 1; i++)
+                            {
+                                if(obecnePole.dostepneNumeryRzad[i] && obecnePole.dostepneNumeryKolumna[i] && obecnePole.dostepneNumeryMniejsze[i] && obecnePole.dostepneNumeryWieksze[i])
+                                {
+                                    dostepneSprawdzenia++;
+                                }
+                            }
+                            indeksI = obecnePole.nrPola / 10;
+                            indeksJ = obecnePole.nrPola % 10;
+                            przywrocDostepneCyfry(indeksI, indeksJ);
+                            wykorzystanePola--;
+                            obecnieSprawdzaWartosc = obecnePole.wartosc;
+
+                        }
+                    }
+                }
+                obecnieSprawdzaWartosc = obecnePole.wartosc;
+            if(wykorzystanePola != rozmiar * rozmiar) {
+                PoleFuto najlepszyWybor = plansza[1][1];
+                PoleFuto pomocniczaZmienna;
+                int najmniejMozliwosci = 10;
+                for(int i = 1; i < rozmiar + 1; i++) {
+                    for (int j = 1; j < rozmiar + 1; j++) {
+                        if (!plansza[i][j].uzyto) {
+                            dostepneSprawdzenia = 0;
+                            for (int m = 1; m < rozmiar + 1; m++) {
+                                if (plansza[i][j].dostepneNumeryRzad[m] && plansza[i][j].dostepneNumeryKolumna[m] && plansza[i][j].dostepneNumeryMniejsze[m] && plansza[i][j].dostepneNumeryWieksze[m]) {
+                                    dostepneSprawdzenia++;
+                                }
+                            }
+                            if (dostepneSprawdzenia < najmniejMozliwosci ) {
+                                najmniejMozliwosci = dostepneSprawdzenia;
+                                najlepszyWybor = plansza[i][j];
+                            }
+                        }
+                    }
+                }
+                dostepneSprawdzenia = najmniejMozliwosci;
+                pomocniczaZmienna = obecnePole;
+                obecnePole.nastepnePole = najlepszyWybor;
+                obecnePole = obecnePole.nastepnePole;
+                obecnePole.poprzedniePole = pomocniczaZmienna;
+                obecnePole.uzyto =  true;
+
+
+            }
+
+
+            wykorzystanePola++;
         }
         return true;
     }

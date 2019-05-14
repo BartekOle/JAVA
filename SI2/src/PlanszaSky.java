@@ -4,13 +4,15 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class PlanszaSky {
-    int rozmiar;
-    PoleSky plansza[][];
-    int GoraDol[][];
-    int LewaPrawa[][];
+    protected int rozmiar;
+    protected PoleSky plansza[][];
+    protected int goraDol[][];
+    protected int lewaPrawa[][];
+    protected int liczbaIteracji;
 
     public void wczytanieDanychSky() throws IOException {
-        String fileName = "C:\\Users\\dios1\\IdeaProjects\\SI2\\src\\test_sky_6_3.txt";
+        liczbaIteracji = 0;
+        String fileName = "C:\\Users\\dios1\\IdeaProjects\\SI2\\src\\test_sky_5_0.txt";
         File file = new File(fileName);
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
@@ -18,21 +20,21 @@ public class PlanszaSky {
         line = br.readLine();
         rozmiar = Integer.parseInt(line);
         plansza = new PoleSky[rozmiar + 1][rozmiar + 1];
-        GoraDol = new int[2][rozmiar + 1];
-        LewaPrawa = new int[rozmiar + 1][2];
+        goraDol = new int[2][rozmiar + 1];
+        lewaPrawa = new int[rozmiar + 1][2];
         String[] split;
         for (int i = 0; i < 2; i++) {
             line = br.readLine();
             split = line.split(";");
             for (int j = 1; j < rozmiar + 1; j++) {
-                GoraDol[i][j] = Integer.parseInt(split[j]);
+                goraDol[i][j] = Integer.parseInt(split[j]);
             }
         }
         for (int i = 0; i < 2; i++) {
             line = br.readLine();
             split = line.split(";");
             for (int j = 1; j < rozmiar + 1; j++) {
-                LewaPrawa[j][i] = Integer.parseInt(split[j]);
+                lewaPrawa[j][i] = Integer.parseInt(split[j]);
             }
         }
         int numerKolejnosc = 0;
@@ -75,7 +77,7 @@ public class PlanszaSky {
     }
 
     public boolean sprawdzGora(int i, int j) {
-        if (GoraDol[0][j] == 0) {
+        if (goraDol[0][j] == 0) {
             return true;
         } else {
             int najwiekszaWatosc = plansza[1][j].wartosc;
@@ -86,16 +88,16 @@ public class PlanszaSky {
                     najwiekszaWatosc = plansza[k][j].wartosc;
                 }
             }
-            if (ileWidac > GoraDol[0][j] && i == rozmiar) {
+            if (ileWidac > goraDol[0][j] && i == rozmiar) {
                 return false;
             }
-            else if(ileWidac == GoraDol[0][j])
+            else if(ileWidac == goraDol[0][j])
             {
                 return true;
             }
             else
             {
-                if(ileWidac + (rozmiar - i) >= GoraDol[0][j])
+                if(ileWidac + (rozmiar - i) >= goraDol[0][j])
                 {
                     return true;
                 }
@@ -109,7 +111,7 @@ public class PlanszaSky {
 
     public boolean sprawdzDol(int i, int j) {
 
-        if (GoraDol[1][j] == 0) {
+        if (goraDol[1][j] == 0) {
             return true;
         } else {
             int najwiekszaWartosc = plansza[i][j].wartosc;
@@ -120,16 +122,16 @@ public class PlanszaSky {
                     najwiekszaWartosc = plansza[k][j].wartosc;
                 }
             }
-            if (ileWidac > GoraDol[1][j] && i == rozmiar) {
+            if (ileWidac > goraDol[1][j] && i == rozmiar) {
                 return false;
             }
-            else if(ileWidac == GoraDol[1][j])
+            else if(ileWidac == goraDol[1][j])
             {
                 return true;
             }
             else
             {
-                if(ileWidac + (rozmiar - i) >= GoraDol[1][j])
+                if(ileWidac + (rozmiar - i) >= goraDol[1][j])
                 {
                     return true;
                 }
@@ -143,7 +145,7 @@ public class PlanszaSky {
 
     public boolean sprawdzLewa(int i, int j) {
 
-        if (LewaPrawa[i][0] == 0) {
+        if (lewaPrawa[i][0] == 0) {
             return true;
         } else {
             int najwiekszaWartosc = plansza[i][1].wartosc;
@@ -154,16 +156,16 @@ public class PlanszaSky {
                     najwiekszaWartosc = plansza[i][k].wartosc;
                 }
             }
-            if (ileWidac > LewaPrawa[i][0] && j == rozmiar) {
+            if (ileWidac > lewaPrawa[i][0] && j == rozmiar) {
                 return false;
             }
-            else if(ileWidac == LewaPrawa[i][0])
+            else if(ileWidac == lewaPrawa[i][0])
             {
                 return true;
             }
             else
             {
-                if(ileWidac + (rozmiar - j) >= LewaPrawa[i][0])
+                if(ileWidac + (rozmiar - j) >= lewaPrawa[i][0])
                 {
                     return true;
                 }
@@ -177,7 +179,7 @@ public class PlanszaSky {
 
     public boolean sprawdzPrawa(int i, int j) {
 
-        if (LewaPrawa[i][1] == 0) {
+        if (lewaPrawa[i][1] == 0) {
             return true;
         } else {
             int najwiekszaWartosc = plansza[i][j].wartosc;
@@ -188,16 +190,16 @@ public class PlanszaSky {
                     najwiekszaWartosc = plansza[i][k].wartosc;
                 }
             }
-            if (ileWidac > LewaPrawa[i][1] && j == rozmiar) {
+            if (ileWidac > lewaPrawa[i][1] && j == rozmiar) {
                 return false;
             }
-            else if(ileWidac == LewaPrawa[i][1])
+            else if(ileWidac == lewaPrawa[i][1])
             {
                 return true;
             }
             else
             {
-                if(ileWidac + (rozmiar - j) >= LewaPrawa[i][1])
+                if(ileWidac + (rozmiar - j) >= lewaPrawa[i][1])
                 {
                     return true;
                 }
@@ -243,6 +245,7 @@ public class PlanszaSky {
             boolean sprawdzWartoscPola = false;
                 while (!sprawdzWartoscPola) {
                     while (!sprawdzWartoscPola && obecnePole.sprawdzoneCyfry < rozmiar) {
+                        liczbaIteracji++;
                         obecnePole.wartosc = obecnieSprawdzaWartosc;
                         obecnePole.sprawdzoneCyfry++;
                         int indeksI = obecnePole.nrPola / 10;
@@ -292,7 +295,7 @@ public class PlanszaSky {
         for (int k = i + 1; k < rozmiar + 1; k++) {
             plansza[k][j].dostepneNumeryKolumna[plansza[i][j].wartosc] = false;
         }
-        if (GoraDol[0][j] != 0) {
+        if (goraDol[0][j] != 0) {
             int najwiekszaWatosc = plansza[1][j].wartosc;
             int ileWidac = 1;
             for (int k = 2; k <= i; k++) {
@@ -301,14 +304,14 @@ public class PlanszaSky {
                     najwiekszaWatosc = plansza[k][j].wartosc;
                 }
             }
-            if (ileWidac == GoraDol[0][j]) {
+            if (ileWidac == goraDol[0][j]) {
                 for (int k = i + 1; k < rozmiar + 1; k++) {
                     for (int m = najwiekszaWatosc; m < rozmiar + 1; m++)
                         plansza[k][j].dostepneNumeryGora[m] = false;
                 }
             }
         }
-        if (LewaPrawa[i][0] != 0) {
+        if (lewaPrawa[i][0] != 0) {
             int najwiekszaWartosc = plansza[i][1].wartosc;
             int ileWidac = 1;
             for (int k = 2; k <= j; k++) {
@@ -317,7 +320,7 @@ public class PlanszaSky {
                     najwiekszaWartosc = plansza[i][k].wartosc;
                 }
             }
-            if (ileWidac == LewaPrawa[i][0]) {
+            if (ileWidac == lewaPrawa[i][0]) {
                 for (int k = j + 1; k < rozmiar + 1; k++) {
                     for (int m = najwiekszaWartosc; m < rozmiar + 1; m++)
                         plansza[i][k].dostepneNumeryLewo[m] = false;
@@ -334,7 +337,7 @@ public class PlanszaSky {
         for (int k = i + 1; k < rozmiar + 1; k++) {
             plansza[k][j].dostepneNumeryKolumna[plansza[i][j].wartosc] = true;
         }
-        if (GoraDol[0][j] != 0) {
+        if (goraDol[0][j] != 0) {
             int najwiekszaWatosc = plansza[1][j].wartosc;
             int ileWidac = 1;
             for (int k = 2; k <= i; k++) {
@@ -343,14 +346,14 @@ public class PlanszaSky {
                     najwiekszaWatosc = plansza[k][j].wartosc;
                 }
             }
-            if (ileWidac == GoraDol[0][j]) {
+            if (ileWidac == goraDol[0][j]) {
                 for (int k = i + 1; k < rozmiar + 1; k++) {
                     for (int m = najwiekszaWatosc; m < rozmiar + 1; m++)
                         plansza[k][j].dostepneNumeryGora[m] = true;
                 }
             }
         }
-        if (LewaPrawa[i][0] != 0) {
+        if (lewaPrawa[i][0] != 0) {
             int najwiekszaWartosc = plansza[i][1].wartosc;
             int ileWidac = 1;
             for (int k = 2; k <= j; k++) {
@@ -359,7 +362,7 @@ public class PlanszaSky {
                     najwiekszaWartosc = plansza[i][k].wartosc;
                 }
             }
-            if (ileWidac == LewaPrawa[i][0]) {
+            if (ileWidac == lewaPrawa[i][0]) {
                 for (int k = j + 1; k < rozmiar + 1; k++) {
                     for (int m = najwiekszaWartosc; m < rozmiar + 1; m++)
                         plansza[i][k].dostepneNumeryLewo[m] = true;
@@ -403,6 +406,7 @@ public class PlanszaSky {
             boolean sprawdzWartoscPola = false;
                 while (!sprawdzWartoscPola) {
                     while (!sprawdzWartoscPola && obecnePole.sprawdzoneCyfry < dostepneSprawdzenia) {
+                        liczbaIteracji++;
                         int indeksDostepnosci = obecnieSprawdzaWartosc + 1;
                         if(indeksDostepnosci == rozmiar + 1)
                         {
@@ -471,6 +475,112 @@ public class PlanszaSky {
                         dostepneSprawdzenia++;
                     }
                 }
+            }
+
+            obecnyNumerPola++;
+        }
+        return true;
+    }
+
+    public boolean sprawdzanieWprzodNajbardziejOgraniczona()
+    {
+        int obecnyNumerPola = 1;
+        PoleSky obecnePole = plansza[1][1];
+        obecnePole.uzyto = true;
+        int obecnieSprawdzaWartosc = 0;
+        int dostepneSprawdzenia = rozmiar;
+        while(obecnyNumerPola <= rozmiar*rozmiar) {
+            boolean sprawdzWartoscPola = false;
+            while (!sprawdzWartoscPola) {
+                while (!sprawdzWartoscPola && obecnePole.sprawdzoneCyfry < dostepneSprawdzenia) {
+                    liczbaIteracji++;
+                    int indeksDostepnosci = obecnieSprawdzaWartosc + 1;
+                    if(indeksDostepnosci == rozmiar + 1)
+                    {
+                        indeksDostepnosci = 1;
+                    }
+                    while(!obecnePole.dostepneNumeryRzad[indeksDostepnosci] || !obecnePole.dostepneNumeryKolumna[indeksDostepnosci] || !obecnePole.dostepneNumeryGora[indeksDostepnosci] || !obecnePole.dostepneNumeryLewo[indeksDostepnosci])
+                    {
+                        indeksDostepnosci++;
+                        if(indeksDostepnosci == rozmiar + 1)
+                        {
+                            indeksDostepnosci = 1;
+                        }
+                    }
+                    obecnieSprawdzaWartosc = indeksDostepnosci;
+                    obecnePole.wartosc = obecnieSprawdzaWartosc;
+                    obecnePole.sprawdzoneCyfry++;
+                    int indeksI = obecnePole.nrPola / 10;
+                    int indeksJ = obecnePole.nrPola % 10;
+                    usunDostepneCyfry(indeksI, indeksJ);
+                    if (sprawdzCzyJakiesDostepne(indeksI, indeksJ) && sprawdzPrawa(indeksI, indeksJ) && sprawdzDol(indeksI, indeksJ)) {
+                        sprawdzWartoscPola = true;
+                    }
+                    else
+                    {
+                        indeksI = obecnePole.nrPola / 10;
+                        indeksJ = obecnePole.nrPola % 10;
+                        przywrocDostepneCyfry(indeksI, indeksJ);
+                    }
+                }
+                if (!sprawdzWartoscPola) {
+                    if (obecnePole.numerWKolejnosci == 1 && obecnePole.sprawdzoneCyfry == rozmiar) {
+                        return false;
+                    } else {
+                        int indeksI = obecnePole.nrPola / 10;
+                        int indeksJ = obecnePole.nrPola % 10;
+                        przywrocDostepneCyfry(indeksI, indeksJ);
+                        obecnePole.wartosc = 0;
+                        obecnePole.sprawdzoneCyfry = 0;
+                        obecnePole.uzyto = false;
+                        obecnePole = obecnePole.poprzedniePole;
+                        dostepneSprawdzenia = 0;
+                        for(int i = 1; i < rozmiar + 1; i++)
+                        {
+                            if(obecnePole.dostepneNumeryRzad[i] && obecnePole.dostepneNumeryKolumna[i] && obecnePole.dostepneNumeryGora[i] && obecnePole.dostepneNumeryLewo[i])
+                            {
+                                dostepneSprawdzenia++;
+                            }
+                        }
+                        indeksI = obecnePole.nrPola / 10;
+                        indeksJ = obecnePole.nrPola % 10;
+                        przywrocDostepneCyfry(indeksI, indeksJ);
+                        obecnyNumerPola--;
+                        obecnieSprawdzaWartosc = obecnePole.wartosc;
+
+                    }
+                }
+            }
+            obecnieSprawdzaWartosc = obecnePole.wartosc;
+
+            if(obecnePole.numerWKolejnosci != rozmiar * rozmiar) {
+                PoleSky najlepszyWybor = plansza[1][1];
+                PoleSky pomocniczaZmienna;
+                int najmniejMozliwosci = 10;
+                for(int i = 1; i < rozmiar + 1; i++) {
+                    for (int j = 1; j < rozmiar + 1; j++) {
+                        if (!plansza[i][j].uzyto) {
+                            dostepneSprawdzenia = 0;
+                            for (int m = 1; m < rozmiar + 1; m++) {
+                                if (plansza[i][j].dostepneNumeryRzad[m] && plansza[i][j].dostepneNumeryKolumna[m] && plansza[i][j].dostepneNumeryGora[m] && plansza[i][j].dostepneNumeryLewo[m]) {
+                                    dostepneSprawdzenia++;
+                                }
+                            }
+                            if (dostepneSprawdzenia < najmniejMozliwosci ) {
+                                najmniejMozliwosci = dostepneSprawdzenia;
+                                najlepszyWybor = plansza[i][j];
+                            }
+                        }
+                    }
+                }
+                dostepneSprawdzenia = najmniejMozliwosci;
+                pomocniczaZmienna = obecnePole;
+                obecnePole.nastepnePole = najlepszyWybor;
+                obecnePole = obecnePole.nastepnePole;
+                obecnePole.poprzedniePole = pomocniczaZmienna;
+                obecnePole.uzyto =  true;
+
+
             }
 
             obecnyNumerPola++;

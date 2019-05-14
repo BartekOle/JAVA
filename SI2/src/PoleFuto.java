@@ -1,21 +1,20 @@
 import java.util.ArrayList;
 
 public class PoleFuto {
-    int wartosc;
-    int nrPola;
-    int numerWKolejnosci;
-    PoleFuto nastepnePole;
-    PoleFuto poprzedniePole;
-    boolean dostepneNumeryRzad[];
-    boolean dostepneNumeryKolumna[];
-    boolean dostepneNumeryWieksze[];
-    boolean dostepneNumeryMniejsze[];
-    boolean dostepneNumeryWieksze2[];
-    boolean dostepneNumeryMniejsze2[];
-    ArrayList<PoleFuto> mniejsze;
-    ArrayList<PoleFuto> wieksze;
-    boolean naStale;
-    int sprawdzoneCyfry;
+    protected int wartosc;
+    protected int nrPola;
+    protected int numerWKolejnosci;
+    protected PoleFuto nastepnePole;
+    protected PoleFuto poprzedniePole;
+    protected  boolean dostepneNumeryRzad[];
+    protected boolean dostepneNumeryKolumna[];
+    protected boolean dostepneNumeryWieksze[];
+    protected boolean dostepneNumeryMniejsze[];
+    protected ArrayList<PoleFuto> mniejsze;
+    protected ArrayList<PoleFuto> wieksze;
+    protected boolean naStale;
+    protected int sprawdzoneCyfry;
+    protected boolean uzyto;
     public PoleFuto(int wartosc, int nrPola, int numerWKolejnosci, int rozmiar)
     {
         mniejsze = new ArrayList<PoleFuto>();
@@ -28,11 +27,10 @@ public class PoleFuto {
         this.dostepneNumeryKolumna = new boolean[rozmiar+1];
         this.dostepneNumeryMniejsze = new boolean[rozmiar+1];
         this.dostepneNumeryWieksze = new boolean[rozmiar+1];
-        this.dostepneNumeryMniejsze2 = new boolean[rozmiar+1];
-        this.dostepneNumeryWieksze2 = new boolean[rozmiar+1];
         if(wartosc != 0)
         {
             this.naStale = true;
+            this.uzyto = true;
         }
         else {
             for (int i = 1; i < rozmiar + 1; i++) {
@@ -40,10 +38,9 @@ public class PoleFuto {
                 this.dostepneNumeryKolumna[i] = true;
                 this.dostepneNumeryMniejsze[i] = true;
                 this.dostepneNumeryWieksze[i] = true;
-                this.dostepneNumeryMniejsze2[i] = true;
-                this.dostepneNumeryWieksze2[i] = true;
             }
             this.naStale = false;
+            this.uzyto = false;
         }
     }
 }
