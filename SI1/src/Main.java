@@ -23,9 +23,9 @@ public class Main  {
     static private double [][] odleglosci;
     public static void main(String[] args) throws IOException  {
 
-        pop_size = 100;
-        gen = 100;
-        tour = 10;
+        pop_size = 500;
+        gen = 200;
+        tour = 50;
         Px = 0.7;
         Pm = 0.2;
         populacja = new Osobnik[pop_size];
@@ -51,7 +51,7 @@ public class Main  {
 
     public static void wczytanieDanych() throws IOException
     {
-        String fileName = "C:\\Users\\dios1\\IdeaProjects\\SI1\\src\\hard_0.ttp";
+        String fileName = "C:\\Users\\dios1\\IdeaProjects\\SI1\\src\\medium_1.ttp";
         File file = new File(fileName);
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
@@ -526,7 +526,7 @@ public class Main  {
                 sb.append((profit() - najgorszy()));
                 sb.append('\n');
 
-                selekcja();
+                ruletka();
                 krzyzowanie();
                 mutacja();
 
