@@ -34,7 +34,7 @@ public class PlanszaFuto {
 
     public  void wczytanieDanychFuto() throws IOException
     {
-        String fileName = "C:\\Users\\dios1\\IdeaProjects\\SI2\\src\\test_futo_9_1.txt";
+        String fileName = "C:\\Users\\dios1\\IdeaProjects\\SI2\\src\\test_futo_4_1.txt";
         File file = new File(fileName);
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
@@ -196,7 +196,6 @@ public class PlanszaFuto {
         int obecnyNumerPola = 1;
         PoleFuto obecnePole = plansza[1][1];
         int obecnieSprawdzaWartosc = 1;
-        boolean sprawdzObecnePole = false;
         while(obecnyNumerPola <= rozmiar*rozmiar) {
 
             boolean sprawdzWartoscPola = false;
@@ -234,7 +233,6 @@ public class PlanszaFuto {
                                 {
                                     obecnePole = obecnePole.poprzedniePole;
                                 }
-                            System.out.println("Cofniecie do pola numer: " + obecnePole.nrPola);
                             obecnyNumerPola = obecnePole.numerWKolejnosci;
                             if (obecnePole.wartosc == rozmiar) {
                                 obecnieSprawdzaWartosc = 1;
@@ -250,7 +248,6 @@ public class PlanszaFuto {
                     obecnieSprawdzaWartosc = obecnePole.wartosc + 1;
                 }
             }
-            System.out.println("Zapisanie wartosci dla pola numer: " + obecnePole.nrPola + " Wartosc wyniosla: " + obecnePole.wartosc);
             obecnePole = obecnePole.nastepnePole;
             obecnyNumerPola++;
         }

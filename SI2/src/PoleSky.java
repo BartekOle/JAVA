@@ -13,7 +13,7 @@ public class PoleSky {
         this.sprawdzoneCyfry = 0;
         this.numerWKolejnosci = numerWKolejnosci;
         this.dostepneNumery = new boolean[rozmiar+1];
-        for (int i = 1; dostepneNumery.length < rozmiar + 1; i++) {
+        for (int i = 1; i < rozmiar + 1; i++) {
                 this.dostepneNumery[i] = true;
         }
     }

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        PlanszaFuto rozwiazanie = new PlanszaFuto();
+        /*PlanszaFuto rozwiazanie = new PlanszaFuto();
         rozwiazanie.wczytanieDanychFuto();
         for(int i =1; i < rozwiazanie.rozmiar+1; i++)
         {
@@ -46,8 +46,9 @@ public class Main {
                 System.out.print(rozwiazanie.plansza[i][j].wartosc);
             }
             System.out.println();
-        }
-        /*PlanszaSky rozwiazanie2 = new PlanszaSky();
+        }*/
+
+        PlanszaSky rozwiazanie2 = new PlanszaSky();
         rozwiazanie2.wczytanieDanychSky();
         for(int i =1; i < rozwiazanie2.rozmiar+1; i++)
         {
@@ -68,7 +69,15 @@ public class Main {
                 System.out.print(rozwiazanie2.LewaPrawa[i][j]);
             }
             System.out.println();
-        }*/
-
+        }
+        System.out.println(rozwiazanie2.przeszukiwaniePrzyrostoweZPowrotem());
+        for(int i =1; i < rozwiazanie2.rozmiar+1; i++)
+        {
+            for(int j = 1; j < rozwiazanie2.rozmiar+1; j++)
+            {
+                System.out.print(rozwiazanie2.plansza[i][j].wartosc);
+            }
+            System.out.println();
+        }
     }
 }
