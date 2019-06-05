@@ -6,12 +6,11 @@ public class Main {
 
         Scanner scan = new Scanner(System.in);
     Plansza test = new Plansza();
-        System.out.println(test.plansza[2][6].sasiedzi.indexOf(46));
     System.out.println("Start gry w młynek");
 
-        for(int i = 0; i < 9; i++)
+        for(int i = 0; i < 4; i++)
         {
-            /*System.out.println("Gracz białymi pionkami ustawia swoj pionek");
+            System.out.println("Gracz białymi pionkami ustawia swoj pionek");
             test.wyswietl();
             String pole = "fsfs";
             while(pole.length() != 2) {
@@ -23,16 +22,15 @@ public class Main {
             }
             test.postaw(pole, 1);
             test.zbicie(pole, 1);
-            System.out.println("Gracz czarnymi pionkami ustawia swoj pionek");
+           /*
+            test.minMaxEtap1(1, "alphabeta", "brak", 1);
             test.wyswietl();*/
-            test.minMaxEtap1(1, "alphabeta");
-            test.wyswietl();
-            test.minMaxEtap1(2, "alphabeta");
+            test.minMaxEtap1(2, "alphabeta", "dodatkowePunkty", 2);
             test.wyswietl();
         }
         while(test.iloscBiale > 2 && test.iloscCzarne > 2)
         {
-            /*System.out.println("Gracz bialymi podaje pole na ktorym znajduje sie pionek, ktorym chce wykonac ruch");
+            System.out.println("Gracz bialymi podaje pole na ktorym znajduje sie pionek, ktorym chce wykonac ruch");
             test.wyswietl();
             String pole = "gdgfd";
             boolean sprawdz = false;
@@ -72,24 +70,25 @@ public class Main {
             else
             {
                 test.ruchPoCalejPlanszy(pole, nowePole, 1);
-            }*/
+            }
+            /*
             if(test.iloscBiale > 3) {
-                test.minMaxEtap2(1, "alphabeta");
+                test.minMaxEtap2(1, "alphabeta", "brak", 1);
                 test.wyswietl();
             }
             else
             {
-                test.minMaxEtap3(1, "alphabeta");
+                test.minMaxEtap3(1, "alphabeta", "brak", 1);
                 test.wyswietl();
-            }
+            }*/
             if(test.iloscCzarne > 2) {
                 if(test.iloscCzarne > 3) {
-                    test.minMaxEtap2(2, "alphabeta");
+                    test.minMaxEtap2(2, "alphabeta", "dodatkowePunkty", 2);
                     test.wyswietl();
                 }
                 else
                 {
-                    test.minMaxEtap3(2, "alphabeta");
+                    test.minMaxEtap3(2, "alphabeta", "dodatkowePunkty", 1);
                     test.wyswietl();
                 }
             }
@@ -207,11 +206,11 @@ public class Main {
     }*/
         if(test.iloscBiale == 2)
         {
-            System.out.println("Wygrywa gracz czarnymi pionkami");
+            System.out.println("Wygrywa gracz czarnymi pionkami, wykonanych iteracji: " + test.iteracje);
         }
         else
         {
-            System.out.println("Wygrywa gracz bialymi pionkami");
+            System.out.println("Wygrywa gracz bialymi pionkami, wykonanych iteracji: " + test.iteracje);
         }
     }
 }

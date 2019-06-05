@@ -37,10 +37,6 @@ class Node<T> {
         this.dane = dane;
     }
 
-    public int getDegree() {
-        return dziecko.size();
-    }
-
     public boolean jestLisc(){
         return dziecko.isEmpty();
     }
