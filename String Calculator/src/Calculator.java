@@ -13,13 +13,11 @@ public class Calculator {
        int result = 0;
        if(!numbers.isEmpty()) {
            String[] arrayNumbers = numbers.split(",");
-           if(arrayNumbers.length == 1)
+           for(String number : arrayNumbers)
            {
-               result = Integer.parseInt(arrayNumbers[0]);
-           }
-           else
-           {
-               result = Integer.parseInt(arrayNumbers[0]) + Integer.parseInt(arrayNumbers[1]);
+               if(!number.isEmpty()) {
+                   result += Integer.parseInt(number);
+               }
            }
        }
        return result;
