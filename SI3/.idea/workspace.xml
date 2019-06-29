@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5e26a0d5-1c09-444e-96c4-b0225a2ba7f6" name="Default Changelist" comment="" />
+    <list default="true" id="5e26a0d5-1c09-444e-96c4-b0225a2ba7f6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SI3/META-INF/SI3.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SI3/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SI3/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SI3/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SI3/Node.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SI3/Pionek.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SI3/Plansza.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SI3/Plansza.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SI3/PlanszaDrzewo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SI3/Pole.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SI3/Pole.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Drzewo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Drzewo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pionek.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Plansza.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Plansza.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PlanszaDrzewo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pole.java" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,8 +29,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Pole.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" selection-start-line="13" selection-end-line="13" />
+            <state relative-caret-position="102">
+              <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -23,122 +38,42 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Drzewo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="37" column="5" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
+            <state relative-caret-position="272">
+              <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
               <folding>
-                <element signature="e#446#447#0" expanded="true" />
-                <element signature="e#475#476#0" expanded="true" />
-                <element signature="e#520#521#0" expanded="true" />
-                <element signature="e#556#557#0" expanded="true" />
-                <element signature="e#582#583#0" expanded="true" />
-                <element signature="e#609#610#0" expanded="true" />
-                <element signature="e#644#645#0" expanded="true" />
-                <element signature="e#676#677#0" expanded="true" />
-                <element signature="e#773#774#0" expanded="true" />
-                <element signature="e#813#814#0" expanded="true" />
-                <element signature="e#1127#1128#0" expanded="true" />
-                <element signature="e#1164#1165#0" expanded="true" />
-                <element signature="e#1205#1206#0" expanded="true" />
-                <element signature="e#1245#1246#0" expanded="true" />
-                <element signature="e#1280#1281#0" expanded="true" />
-                <element signature="e#1311#1312#0" expanded="true" />
-                <element signature="e#1373#1374#0" expanded="true" />
-                <element signature="e#1403#1404#0" expanded="true" />
-                <element signature="e#1889#1890#0" expanded="true" />
-                <element signature="e#1927#1928#0" expanded="true" />
+                <element signature="e#1171#1172#0" expanded="true" />
+                <element signature="e#1211#1212#0" expanded="true" />
+                <element signature="e#1243#1244#0" expanded="true" />
+                <element signature="e#1274#1275#0" expanded="true" />
+                <element signature="e#1322#1323#0" expanded="true" />
+                <element signature="e#1352#1353#0" expanded="true" />
+                <element signature="e#1384#1385#0" expanded="true" />
+                <element signature="e#1422#1423#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Plansza.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="175">
+              <caret line="857" column="83" selection-start-line="857" selection-start-column="41" selection-end-line="857" selection-end-column="83" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Plansza.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-25747">
-              <caret line="133" column="36" selection-start-line="133" selection-start-column="36" selection-end-line="133" selection-end-column="43" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#25825#25834#0" expanded="true" />
-                <element signature="e#27660#27669#0" expanded="true" />
-                <element signature="e#30044#30053#0" expanded="true" />
-                <element signature="e#33568#33577#0" expanded="true" />
-                <element signature="e#36420#36429#0" expanded="true" />
-                <element signature="e#31455#31464#0" expanded="true" />
-                <element signature="e#33022#33031#0" expanded="true" />
-                <element signature="e#34858#34867#0" expanded="true" />
-                <element signature="e#36744#36753#0" expanded="true" />
-                <element signature="e#39243#39252#0" expanded="true" />
-                <element signature="e#41731#41740#0" expanded="true" />
-                <element signature="e#54004#54013#0" expanded="true" />
-                <element signature="e#55890#55899#0" expanded="true" />
-                <element signature="e#59984#59993#0" expanded="true" />
-                <element signature="e#62490#62499#0" expanded="true" />
-                <element signature="e#42875#42884#0" expanded="true" />
-                <element signature="e#44838#44847#0" expanded="true" />
-                <element signature="e#46543#46552#0" expanded="true" />
-                <element signature="e#48370#48379#0" expanded="true" />
-                <element signature="e#50800#50809#0" expanded="true" />
-                <element signature="e#49690#49699#0" expanded="true" />
-                <element signature="e#79665#79674#0" expanded="true" />
-                <element signature="e#81458#81467#0" expanded="true" />
-                <element signature="e#85275#85284#0" expanded="true" />
-                <element signature="e#87767#87776#0" expanded="true" />
-                <element signature="e#89332#89341#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/lang/Integer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="614" selection-start-line="614" selection-end-line="614" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/lang/NumberFormatException.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="64" selection-start-line="64" selection-end-line="64" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/util/LinkedList.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="554" selection-start-line="554" selection-end-line="554" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Pionek.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1349">
-              <caret line="86" selection-start-line="86" selection-end-line="86" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/net/SocketInputStream.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="388">
-              <caret line="93" column="23" selection-start-line="93" selection-start-column="23" selection-end-line="93" selection-end-column="23" />
+            <state relative-caret-position="153">
+              <caret line="9" column="46" lean-forward="true" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="46" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -166,6 +101,8 @@
       <find>getdziecko</find>
       <find>getdane</find>
       <find>zbicieKomputer</find>
+      <find>Random</find>
+      <find>genera</find>
     </findStrings>
     <replaceStrings>
       <replace>dane</replace>
@@ -181,23 +118,27 @@
       <replace>zbicieMax</replace>
     </replaceStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/Pionek.java" />
-        <option value="$PROJECT_DIR$/src/Pole.java" />
         <option value="$PROJECT_DIR$/src/PlanszaDrzewo.java" />
+        <option value="$PROJECT_DIR$/src/Pole.java" />
         <option value="$PROJECT_DIR$/src/Drzewo.java" />
         <option value="$PROJECT_DIR$/src/Plansza.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-18" />
-    <option name="width" value="1162" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-54" />
+    <option name="width" value="1104" />
     <option name="height" value="1087" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -236,10 +177,11 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559699036858" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559749183886" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/Semestr 6/Semestr VI. PWr W8 informatyka 2014-2017/si/laboratorium/4/imagessimilarity" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -282,11 +224,13 @@
       <workItem from="1557933118149" duration="1566000" />
       <workItem from="1558515878592" duration="10499000" />
       <workItem from="1559488961651" duration="41025000" />
+      <workItem from="1559721453311" duration="10499000" />
+      <workItem from="1561210535222" duration="6501000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70778000" />
+    <option name="totallyTimeSpent" value="87778000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -299,9 +243,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.26119402" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20042644" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -310,7 +253,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32917964" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32917964" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997923" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -332,7 +275,7 @@
       <window_info anchor="right" id="Palette&#9;" order="8" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18656716" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19829424" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -341,7 +284,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32917964" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32917964" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997923" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -427,27 +370,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PlanszaDrzewo.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/lang/Integer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Pole.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        <state relative-caret-position="9877">
+          <caret line="614" selection-start-line="614" selection-end-line="614" />
         </state>
       </provider>
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/lang/NumberFormatException.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
+        <state relative-caret-position="629">
           <caret line="64" selection-start-line="64" selection-end-line="64" />
         </state>
       </provider>
     </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/net/SocketInputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1071">
+          <caret line="93" column="23" selection-start-line="93" selection-start-column="23" selection-end-line="93" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Pionek.java" />
+    <entry file="file://$PROJECT_DIR$/src/PlanszaDrzewo.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/util/LinkedList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="199">
@@ -455,95 +400,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Drzewo.java">
+    <entry file="file://$PROJECT_DIR$/src/Pole.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="37" column="5" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
-          <folding>
-            <element signature="e#446#447#0" expanded="true" />
-            <element signature="e#475#476#0" expanded="true" />
-            <element signature="e#520#521#0" expanded="true" />
-            <element signature="e#556#557#0" expanded="true" />
-            <element signature="e#582#583#0" expanded="true" />
-            <element signature="e#609#610#0" expanded="true" />
-            <element signature="e#644#645#0" expanded="true" />
-            <element signature="e#676#677#0" expanded="true" />
-            <element signature="e#773#774#0" expanded="true" />
-            <element signature="e#813#814#0" expanded="true" />
-            <element signature="e#1127#1128#0" expanded="true" />
-            <element signature="e#1164#1165#0" expanded="true" />
-            <element signature="e#1205#1206#0" expanded="true" />
-            <element signature="e#1245#1246#0" expanded="true" />
-            <element signature="e#1280#1281#0" expanded="true" />
-            <element signature="e#1311#1312#0" expanded="true" />
-            <element signature="e#1373#1374#0" expanded="true" />
-            <element signature="e#1403#1404#0" expanded="true" />
-            <element signature="e#1889#1890#0" expanded="true" />
-            <element signature="e#1927#1928#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/net/SocketInputStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="93" column="23" selection-start-line="93" selection-start-column="23" selection-end-line="93" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1349">
-          <caret line="86" selection-start-line="86" selection-end-line="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Pionek.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/lang/Integer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="614" selection-start-line="614" selection-end-line="614" />
+        <state relative-caret-position="102">
+          <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Plansza.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-25747">
-          <caret line="133" column="36" selection-start-line="133" selection-start-column="36" selection-end-line="133" selection-end-column="43" />
+        <state relative-caret-position="175">
+          <caret line="857" column="83" selection-start-line="857" selection-start-column="41" selection-end-line="857" selection-end-column="83" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#25825#25834#0" expanded="true" />
-            <element signature="e#27660#27669#0" expanded="true" />
-            <element signature="e#30044#30053#0" expanded="true" />
-            <element signature="e#33568#33577#0" expanded="true" />
-            <element signature="e#36420#36429#0" expanded="true" />
-            <element signature="e#31455#31464#0" expanded="true" />
-            <element signature="e#33022#33031#0" expanded="true" />
-            <element signature="e#34858#34867#0" expanded="true" />
-            <element signature="e#36744#36753#0" expanded="true" />
-            <element signature="e#39243#39252#0" expanded="true" />
-            <element signature="e#41731#41740#0" expanded="true" />
-            <element signature="e#54004#54013#0" expanded="true" />
-            <element signature="e#55890#55899#0" expanded="true" />
-            <element signature="e#59984#59993#0" expanded="true" />
-            <element signature="e#62490#62499#0" expanded="true" />
-            <element signature="e#42875#42884#0" expanded="true" />
-            <element signature="e#44838#44847#0" expanded="true" />
-            <element signature="e#46543#46552#0" expanded="true" />
-            <element signature="e#48370#48379#0" expanded="true" />
-            <element signature="e#50800#50809#0" expanded="true" />
-            <element signature="e#49690#49699#0" expanded="true" />
-            <element signature="e#79665#79674#0" expanded="true" />
-            <element signature="e#81458#81467#0" expanded="true" />
-            <element signature="e#85275#85284#0" expanded="true" />
-            <element signature="e#87767#87776#0" expanded="true" />
-            <element signature="e#89332#89341#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Drzewo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+          <folding>
+            <element signature="e#1171#1172#0" expanded="true" />
+            <element signature="e#1211#1212#0" expanded="true" />
+            <element signature="e#1243#1244#0" expanded="true" />
+            <element signature="e#1274#1275#0" expanded="true" />
+            <element signature="e#1322#1323#0" expanded="true" />
+            <element signature="e#1352#1353#0" expanded="true" />
+            <element signature="e#1384#1385#0" expanded="true" />
+            <element signature="e#1422#1423#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="46" lean-forward="true" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

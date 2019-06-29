@@ -2,9 +2,9 @@ import java.util.LinkedList;
 
 
 class Node<T> {
-    private T dane;
-    private Node<T> rodzic;
-    private LinkedList<Node<T>> dziecko;
+    protected T dane;
+    protected Node<T> rodzic;
+    protected LinkedList<Node<T>> dziecko;
 
     public Node() {
         rodzic = null;

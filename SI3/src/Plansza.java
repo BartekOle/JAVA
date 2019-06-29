@@ -4,15 +4,14 @@ import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Plansza {
-    Pole plansza[][];
-    int zbicie[][];
-    int iloscBiale;
-    int iloscCzarne;
-    int punkty;
-    int ostatniMlynekBiale;
-    int ostatniMlynekCzarne;
-    int iteracje;
-    int index;
+    protected Pole plansza[][];
+    protected int zbicie[][];
+    protected int iloscBiale;
+    protected int iloscCzarne;
+    protected int punkty;
+    protected int ostatniMlynekBiale;
+    protected int ostatniMlynekCzarne;
+    protected int iteracje;
 
     public Plansza() {
         iteracje = 0;
@@ -865,7 +864,7 @@ public class Plansza {
         this.iloscCzarne = ostatecznePole.iloscCzarne;
         this.iloscBiale = ostatecznePole.iloscBiale;
         this.ostatniMlynekCzarne = ostatecznePole.ostatniMlynekCzarne;
-        this.ostatniMlynekBiale = ostatecznePole.ostatniMlynekCzarne;
+        this.ostatniMlynekBiale = ostatecznePole.ostatniMlynekBiale;
     }
 
     public void minMaxEtap2(int kolejnosc, String rodzaj, String heurestyka, int glebokosc) {
@@ -1267,7 +1266,7 @@ public class Plansza {
         this.iloscCzarne = ostatecznePole.iloscCzarne;
         this.iloscBiale = ostatecznePole.iloscBiale;
         this.ostatniMlynekCzarne = ostatecznePole.ostatniMlynekCzarne;
-        this.ostatniMlynekBiale = ostatecznePole.ostatniMlynekCzarne;
+        this.ostatniMlynekBiale = ostatecznePole.ostatniMlynekBiale;
     }
 
     public void minMaxEtap3(int kolejnosc, String rodzaj, String heurestyka, int glebokosc) {
@@ -1680,6 +1679,6 @@ public class Plansza {
         this.iloscCzarne = ostatecznePole.iloscCzarne;
         this.iloscBiale = ostatecznePole.iloscBiale;
         this.ostatniMlynekCzarne = ostatecznePole.ostatniMlynekCzarne;
-        this.ostatniMlynekBiale = ostatecznePole.ostatniMlynekCzarne;
+        this.ostatniMlynekBiale = ostatecznePole.ostatniMlynekBiale;
     }
 }
